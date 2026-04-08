@@ -120,6 +120,7 @@ html.dark .downtime-orb-indigo {
 
 /* Main glass card */
 .downtime-card {
+  position: relative;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(40px);
   border-radius: 1.5rem;
@@ -140,6 +141,49 @@ html.dark .downtime-card {
     padding: 2rem;
   }
 }
+
+/* Theme toggle button */
+.downtime-theme-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.625rem;
+  border: 1px solid rgba(229, 231, 235, 0.6);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #6b7280;
+}
+
+html.dark .downtime-theme-btn {
+  background: rgba(31, 41, 55, 0.7);
+  border: 1px solid rgba(75, 85, 99, 0.6);
+  color: #9ca3af;
+}
+
+.downtime-theme-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.95);
+  color: #374151;
+}
+
+html.dark .downtime-theme-btn:hover {
+  background: rgba(31, 41, 55, 0.95);
+  color: #e5e7eb;
+}
+
+/* Show sun in dark mode, moon in light mode */
+.downtime-theme-sun { display: none; }
+.downtime-theme-moon { display: block; }
+
+html.dark .downtime-theme-sun { display: block; }
+html.dark .downtime-theme-moon { display: none; }
 
 /* Header: icon + title horizontal */
 .downtime-header {
