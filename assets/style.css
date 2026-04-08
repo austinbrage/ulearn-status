@@ -1,0 +1,701 @@
+/* 502 Downtime Page Styles */
+
+/* Reset & base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8fafc;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5em;
+  color: #1a202c;
+}
+
+p {
+  margin-bottom: 0;
+  color: #4a5568;
+}
+
+.downtime-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fafafa 0%, #f3f0ff 30%, #eff6ff 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+html.dark .downtime-container {
+  background: #0e0e0e;
+}
+
+/* Animated background orbs */
+.downtime-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.downtime-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.downtime-orb-purple {
+  top: 5rem;
+  left: 2.5rem;
+  width: 24rem;
+  height: 24rem;
+  background: rgba(168, 85, 247, 0.2);
+  animation: downtime-orb-pulse-1 8s ease-in-out infinite;
+}
+
+html.dark .downtime-orb-purple {
+  background: rgba(168, 85, 247, 0.1);
+}
+
+.downtime-orb-blue {
+  bottom: 5rem;
+  right: 2.5rem;
+  width: 24rem;
+  height: 24rem;
+  background: rgba(96, 165, 250, 0.2);
+  animation: downtime-orb-pulse-2 8s ease-in-out infinite;
+}
+
+html.dark .downtime-orb-blue {
+  background: rgba(96, 165, 250, 0.1);
+}
+
+.downtime-orb-indigo {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32rem;
+  height: 32rem;
+  background: rgba(99, 102, 241, 0.1);
+  animation: downtime-orb-pulse-3 10s ease-in-out infinite;
+}
+
+html.dark .downtime-orb-indigo {
+  background: rgba(99, 102, 241, 0.05);
+}
+
+/* Main content wrapper */
+.downtime-content {
+  max-width: 56rem;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  animation: downtime-fade-in 0.6s ease-out;
+}
+
+/* Main glass card */
+.downtime-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(40px);
+  border-radius: 1.5rem;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 1.5rem;
+}
+
+html.dark .downtime-card {
+  background: rgba(31, 41, 55, 0.6);
+  border: 1px solid rgba(75, 85, 99, 0.4);
+}
+
+@media (min-width: 768px) {
+  .downtime-card {
+    padding: 2rem;
+  }
+}
+
+/* Header: icon + title horizontal */
+.downtime-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .downtime-header {
+    flex-direction: row;
+  }
+}
+
+/* Icon wrapper */
+.downtime-icon-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: downtime-scale-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+}
+
+/* Pulse ring */
+.downtime-pulse-ring {
+  position: absolute;
+  width: 112px;
+  height: 112px;
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: 50%;
+  animation: downtime-pulse-ring 2s ease-out infinite;
+}
+
+/* Icon glow */
+.downtime-icon-glow {
+  position: absolute;
+  inset: -8px;
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.2),
+    rgba(99, 102, 241, 0.2)
+  );
+  filter: blur(20px);
+  border-radius: 50%;
+}
+
+/* Main icon */
+.downtime-icon {
+  position: relative;
+  background: linear-gradient(135deg, #9333ea, #a855f7, #6366f1);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.downtime-icon-svg {
+  width: 3.5rem;
+  height: 3.5rem;
+  color: white;
+  animation: downtime-spin 3s linear infinite;
+}
+
+/* Title section */
+.downtime-title-section {
+  flex: 1;
+  text-align: center;
+  animation: downtime-fade-in 0.6s ease-out 0.3s backwards;
+}
+
+@media (min-width: 768px) {
+  .downtime-title-section {
+    text-align: left;
+  }
+}
+
+.downtime-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+html.dark .downtime-title {
+  color: #f3f4f6;
+}
+
+@media (min-width: 768px) {
+  .downtime-title {
+    font-size: 2.25rem;
+  }
+}
+
+.downtime-subtitle {
+  font-size: 1.125rem;
+  color: #4b5563;
+}
+
+html.dark .downtime-subtitle {
+  color: #9ca3af;
+}
+
+/* Two-column grid */
+.downtime-grid {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .downtime-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Info card (left) */
+.downtime-info-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.5),
+    rgba(249, 250, 251, 0.5)
+  );
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  animation: downtime-slide-in-left 0.6s ease-out 0.5s backwards;
+}
+
+html.dark .downtime-info-card {
+  background: linear-gradient(
+    135deg,
+    rgba(17, 24, 39, 0.5),
+    rgba(31, 41, 55, 0.5)
+  );
+  border: 1px solid rgba(75, 85, 99, 0.5);
+}
+
+.downtime-info-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.downtime-info-icon-box {
+  padding: 0.5rem;
+  background: #faf5ff;
+  border-radius: 0.75rem;
+  flex-shrink: 0;
+}
+
+html.dark .downtime-info-icon-box {
+  background: rgba(88, 28, 135, 0.3);
+}
+
+.downtime-info-icon {
+  color: #9333ea;
+}
+
+html.dark .downtime-info-icon {
+  color: #c084fc;
+}
+
+.downtime-info-text {
+  flex: 1;
+}
+
+.downtime-info-title {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+html.dark .downtime-info-title {
+  color: #f3f4f6;
+}
+
+.downtime-info-content {
+  color: #374151;
+  line-height: 1.625;
+  font-size: 0.9375rem;
+}
+
+html.dark .downtime-info-content {
+  color: #d1d5db;
+}
+
+/* Status row */
+.downtime-status-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(250, 245, 255, 0.8);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(233, 213, 255, 0.5);
+}
+
+html.dark .downtime-status-row {
+  background: rgba(88, 28, 135, 0.2);
+  border: 1px solid rgba(126, 34, 206, 0.5);
+}
+
+.downtime-pulse-dot {
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #9333ea;
+  border-radius: 50%;
+  animation: downtime-pulse-dot 2s ease-in-out infinite;
+}
+
+.downtime-status-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0;
+}
+
+html.dark .downtime-status-text {
+  color: #d1d5db;
+}
+
+.downtime-status-value {
+  font-weight: bold;
+  color: #9333ea;
+}
+
+html.dark .downtime-status-value {
+  color: #c084fc;
+}
+
+/* Wait card (right) */
+.downtime-wait-card {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 246, 255, 0.5),
+    rgba(238, 242, 255, 0.5)
+  );
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(191, 219, 254, 0.5);
+  animation: downtime-slide-in-right 0.6s ease-out 0.6s backwards;
+}
+
+html.dark .downtime-wait-card {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 58, 138, 0.2),
+    rgba(49, 46, 129, 0.2)
+  );
+  border: 1px solid rgba(30, 64, 175, 0.5);
+}
+
+.downtime-wait-title {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+html.dark .downtime-wait-title {
+  color: #f3f4f6;
+}
+
+.downtime-wait-emoji {
+  color: #3b82f6;
+}
+
+html.dark .downtime-wait-emoji {
+  color: #60a5fa;
+}
+
+.downtime-wait-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.downtime-wait-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: downtime-fade-in 0.6s ease-out backwards;
+}
+
+.downtime-wait-item:nth-child(1) { animation-delay: 0.7s; }
+.downtime-wait-item:nth-child(2) { animation-delay: 0.8s; }
+.downtime-wait-item:nth-child(3) { animation-delay: 0.9s; }
+
+.downtime-check-icon {
+  color: #10b981;
+  flex-shrink: 0;
+}
+
+.downtime-wait-text {
+  color: #374151;
+  font-size: 0.9375rem;
+}
+
+html.dark .downtime-wait-text {
+  color: #d1d5db;
+}
+
+/* Closing note */
+.downtime-note {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  animation: downtime-fade-in 0.6s ease-out 0.9s backwards;
+}
+
+html.dark .downtime-note {
+  color: #9ca3af;
+}
+
+/* Footer */
+.downtime-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .downtime-footer {
+    flex-direction: row;
+  }
+}
+
+/* Actions */
+.downtime-actions {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  animation: downtime-fade-in 0.6s ease-out 1s backwards;
+}
+
+@media (min-width: 640px) {
+  .downtime-actions {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 768px) {
+  .downtime-actions {
+    order: 1;
+  }
+}
+
+/* Buttons */
+.downtime-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.2s;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+}
+
+.downtime-btn:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.downtime-btn:active {
+  transform: scale(0.95);
+}
+
+.downtime-btn-primary {
+  background: linear-gradient(90deg, #2563eb, #3b82f6, #6366f1);
+  color: white;
+}
+
+.downtime-btn-primary:hover {
+  background: linear-gradient(90deg, #1d4ed8, #2563eb, #4f46e5);
+}
+
+.downtime-btn-secondary {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+html.dark .downtime-btn-secondary {
+  background: rgba(31, 41, 55, 0.8);
+  color: #e5e7eb;
+  border: 1px solid #4b5563;
+}
+
+.downtime-btn-secondary:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+html.dark .downtime-btn-secondary:hover {
+  background: rgba(31, 41, 55, 1);
+}
+
+.downtime-btn-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.downtime-refresh-icon {
+  animation: downtime-spin 2s linear infinite;
+}
+
+.downtime-arrow-icon {
+  transition: transform 0.2s;
+}
+
+.downtime-btn-secondary:hover .downtime-arrow-icon {
+  transform: translateX(-0.25rem);
+}
+
+/* Contact section */
+.downtime-contact {
+  order: 1;
+  text-align: center;
+  animation: downtime-fade-in 0.6s ease-out 1.1s backwards;
+}
+
+@media (min-width: 768px) {
+  .downtime-contact {
+    order: 2;
+    text-align: right;
+  }
+}
+
+.downtime-contact-title {
+  color: #6b7280;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+html.dark .downtime-contact-title {
+  color: #9ca3af;
+}
+
+.downtime-contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .downtime-contact-links {
+    justify-content: flex-end;
+  }
+}
+
+.downtime-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  color: #374151;
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+}
+
+html.dark .downtime-contact-link {
+  background: rgba(31, 41, 55, 0.6);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  color: #d1d5db;
+}
+
+.downtime-contact-link:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.05);
+}
+
+html.dark .downtime-contact-link:hover {
+  background: rgba(31, 41, 55, 0.8);
+}
+
+.downtime-contact-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* Animations */
+@keyframes downtime-orb-pulse-1 {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.2); opacity: 0.5; }
+}
+
+@keyframes downtime-orb-pulse-2 {
+  0%, 100% { transform: scale(1.2); opacity: 0.5; }
+  50% { transform: scale(1); opacity: 0.3; }
+}
+
+@keyframes downtime-orb-pulse-3 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+  50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.4; }
+}
+
+@keyframes downtime-fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes downtime-scale-in {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+@keyframes downtime-pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.3); opacity: 0; }
+  100% { transform: scale(0.8); opacity: 0.5; }
+}
+
+@keyframes downtime-pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes downtime-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes downtime-slide-in-left {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes downtime-slide-in-right {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}

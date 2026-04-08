@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>We'll be right back</title>
+    <meta
+      name="description"
+      content="We're pushing an update or fixing something small. Usually back in under a minute."
+    />
+    <link rel="stylesheet" href="/assets/style.css" />
+    <script>
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        document.documentElement.classList.add("dark");
+      }
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", function (e) {
+          document.documentElement.classList.toggle("dark", e.matches);
+        });
+    </script>
+  </head>
+  <body>
+    <div class="downtime-container">
+      <!-- Animated background orbs -->
+      <div class="downtime-bg">
+        <div class="downtime-orb downtime-orb-purple"></div>
+        <div class="downtime-orb downtime-orb-blue"></div>
+        <div class="downtime-orb downtime-orb-indigo"></div>
+      </div>
+
+      <!-- Main content -->
+      <div class="downtime-content">
+        <div class="downtime-card">
+          <!-- Header: icon + title, horizontal on desktop -->
+          <div class="downtime-header">
+            <div class="downtime-icon-wrapper">
+              <div class="downtime-pulse-ring"></div>
+              <div class="downtime-icon-glow"></div>
+              <div class="downtime-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="downtime-icon-svg"
+                >
+                  <path
+                    d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"
+                  ></path>
+                  <path d="M21 3v5h-5"></path>
+                  <path
+                    d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"
+                  ></path>
+                  <path d="M8 16H3v5"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="downtime-title-section">
+              <h1 class="downtime-title">We'll be right back</h1>
+              <p class="downtime-subtitle">Hang tight — this won't take long</p>
+            </div>
+          </div>
+
+          <!-- Two-column grid -->
+          <div class="downtime-grid">
+            <!-- Left card: what's happening -->
+            <div class="downtime-info-card">
+              <div class="downtime-info-header">
+                <div class="downtime-info-icon-box">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="downtime-info-icon"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 6v6l4 2"></path>
+                  </svg>
+                </div>
+                <div class="downtime-info-text">
+                  <h3 class="downtime-info-title">What's happening</h3>
+                  <p class="downtime-info-content">
+                    We're pushing an update or taking care of something small.
+                    Everything is fine — this is a routine part of keeping
+                    things running smoothly.
+                  </p>
+                </div>
+              </div>
+
+              <div class="downtime-status-row">
+                <div class="downtime-pulse-dot"></div>
+                <p class="downtime-status-text">
+                  Usually back in
+                  <span class="downtime-status-value">under a minute</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Right card: while you wait -->
+            <div class="downtime-wait-card">
+              <h3 class="downtime-wait-title">
+                <span class="downtime-wait-emoji">✦</span>
+                While you wait
+              </h3>
+              <div class="downtime-wait-list">
+                <div class="downtime-wait-item">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="downtime-check-icon"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="m9 12 2 2 4-4"></path>
+                  </svg>
+                  <span class="downtime-wait-text"
+                    >Your data is safe and untouched</span
+                  >
+                </div>
+                <div class="downtime-wait-item">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="downtime-check-icon"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="m9 12 2 2 4-4"></path>
+                  </svg>
+                  <span class="downtime-wait-text"
+                    >No action needed on your end</span
+                  >
+                </div>
+                <div class="downtime-wait-item">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="downtime-check-icon"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="m9 12 2 2 4-4"></path>
+                  </svg>
+                  <span class="downtime-wait-text"
+                    >We'll be back before you know it</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Closing note -->
+          <p class="downtime-note">Thanks for sticking around.</p>
+
+          <!-- Footer: buttons + contact -->
+          <div class="downtime-footer">
+            <div class="downtime-actions">
+              <button
+                onclick="window.location.reload()"
+                class="downtime-btn downtime-btn-primary"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="downtime-btn-icon downtime-refresh-icon"
+                >
+                  <path
+                    d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"
+                  ></path>
+                  <path d="M21 3v5h-5"></path>
+                  <path
+                    d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"
+                  ></path>
+                  <path d="M8 16H3v5"></path>
+                </svg>
+                Refresh Page
+              </button>
+
+              <!-- Hide Return to Home BTN -->
+              <a
+                style="display: none"
+                href="/"
+                class="downtime-btn downtime-btn-secondary"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="downtime-btn-icon downtime-arrow-icon"
+                >
+                  <path d="m12 19-7-7 7-7"></path>
+                  <path d="M19 12H5"></path>
+                </svg>
+                Return to Home
+              </a>
+            </div>
+
+            <div class="downtime-contact">
+              <p class="downtime-contact-title">Need help? Reach out</p>
+              <div class="downtime-contact-links">
+                <a
+                  href="mailto:support@ulearn.com"
+                  class="downtime-contact-link"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="downtime-contact-icon"
+                  >
+                    <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  </svg>
+                  <span>Email</span>
+                </a>
+                <a
+                  href="https://twitter.com/uLearnStatus"
+                  class="downtime-contact-link"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="downtime-contact-icon"
+                  >
+                    <path
+                      d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"
+                    ></path>
+                  </svg>
+                  <span>@uLearnStatus</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
