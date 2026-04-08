@@ -21,7 +21,18 @@ Styles live in `assets/style.css`. Light/dark mode is handled via `html.dark` (s
 | Command | Description |
 |---|---|
 | `make serve` | Serve static pages locally at http://localhost:3001 |
+| `make setup-i18n-dev` | Create lang subdirs with symlinks for i18n testing |
+| `make clean-i18n-dev` | Remove lang subdirs |
 | `make help` | List available commands |
+
+### Testing i18n locally
+
+```bash
+make setup-i18n-dev
+make serve
+```
+
+Then open e.g. `http://localhost:3001/es/502.html` to test a specific language.
 
 ## Deployment
 
