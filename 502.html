@@ -103,8 +103,8 @@
             </div>
 
             <div class="downtime-title-section">
-              <h1 class="downtime-title">We'll be right back</h1>
-              <p class="downtime-subtitle">Hang tight — this won't take long</p>
+              <h1 class="downtime-title" data-i18n="title">We'll be right back</h1>
+              <p class="downtime-subtitle" data-i18n="subtitle">Hang tight — this won't take long</p>
             </div>
           </div>
 
@@ -131,8 +131,8 @@
                   </svg>
                 </div>
                 <div class="downtime-info-text">
-                  <h3 class="downtime-info-title">What's happening</h3>
-                  <p class="downtime-info-content">
+                  <h3 class="downtime-info-title" data-i18n="infoTitle">What's happening</h3>
+                  <p class="downtime-info-content" data-i18n="infoContent">
                     We're pushing an update or taking care of something small.
                     Everything is fine — this is a routine part of keeping
                     things running smoothly.
@@ -143,8 +143,8 @@
               <div class="downtime-status-row">
                 <div class="downtime-pulse-dot"></div>
                 <p class="downtime-status-text">
-                  Usually back in
-                  <span class="downtime-status-value">under a minute</span>
+                  <span data-i18n="statusText">Usually back in</span>
+                  <span class="downtime-status-value" data-i18n="statusValue">under a minute</span>
                 </p>
               </div>
             </div>
@@ -153,7 +153,7 @@
             <div class="downtime-wait-card">
               <h3 class="downtime-wait-title">
                 <span class="downtime-wait-emoji">✦</span>
-                While you wait
+                <span data-i18n="waitTitle">While you wait</span>
               </h3>
               <div class="downtime-wait-list">
                 <div class="downtime-wait-item">
@@ -172,9 +172,7 @@
                     <circle cx="12" cy="12" r="10"></circle>
                     <path d="m9 12 2 2 4-4"></path>
                   </svg>
-                  <span class="downtime-wait-text"
-                    >Your data is safe and untouched</span
-                  >
+                  <span class="downtime-wait-text" data-i18n="waitItem1">Your data is safe and untouched</span>
                 </div>
                 <div class="downtime-wait-item">
                   <svg
@@ -192,9 +190,7 @@
                     <circle cx="12" cy="12" r="10"></circle>
                     <path d="m9 12 2 2 4-4"></path>
                   </svg>
-                  <span class="downtime-wait-text"
-                    >No action needed on your end</span
-                  >
+                  <span class="downtime-wait-text" data-i18n="waitItem2">No action needed on your end</span>
                 </div>
                 <div class="downtime-wait-item">
                   <svg
@@ -212,16 +208,14 @@
                     <circle cx="12" cy="12" r="10"></circle>
                     <path d="m9 12 2 2 4-4"></path>
                   </svg>
-                  <span class="downtime-wait-text"
-                    >We'll be back before you know it</span
-                  >
+                  <span class="downtime-wait-text" data-i18n="waitItem3">We'll be back before you know it</span>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Closing note -->
-          <p class="downtime-note">Thanks for sticking around.</p>
+          <p class="downtime-note" data-i18n="note">Thanks for sticking around.</p>
 
           <!-- Footer: buttons + contact -->
           <div class="downtime-footer">
@@ -251,15 +245,10 @@
                   ></path>
                   <path d="M8 16H3v5"></path>
                 </svg>
-                Refresh Page
+                <span data-i18n="btnRefresh">Refresh Page</span>
               </button>
 
-              <!-- Hide Return to Home BTN -->
-              <a
-                style="display: none"
-                href="/"
-                class="downtime-btn downtime-btn-secondary"
-              >
+              <a href="/" class="downtime-btn downtime-btn-secondary" style="display: none">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -275,17 +264,14 @@
                   <path d="m12 19-7-7 7-7"></path>
                   <path d="M19 12H5"></path>
                 </svg>
-                Return to Home
+                <span data-i18n="btnHome">Return to Home</span>
               </a>
             </div>
 
             <div class="downtime-contact">
-              <p class="downtime-contact-title">Need help? Reach out</p>
+              <p class="downtime-contact-title" data-i18n="contactTitle">Need help? Reach out</p>
               <div class="downtime-contact-links">
-                <a
-                  href="mailto:support@ulearn.com"
-                  class="downtime-contact-link"
-                >
+                <a href="mailto:support@ulearn.com" class="downtime-contact-link">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
@@ -301,12 +287,9 @@
                     <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
                     <rect x="2" y="4" width="20" height="16" rx="2"></rect>
                   </svg>
-                  <span>Email</span>
+                  <span data-i18n="contactEmail">Email</span>
                 </a>
-                <a
-                  href="https://twitter.com/uLearnStatus"
-                  class="downtime-contact-link"
-                >
+                <a href="https://twitter.com/uLearnStatus" class="downtime-contact-link">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
@@ -323,7 +306,7 @@
                       d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"
                     ></path>
                   </svg>
-                  <span>@uLearnStatus</span>
+                  <span data-i18n="contactTwitter">@uLearnStatus</span>
                 </a>
               </div>
             </div>
@@ -331,5 +314,7 @@
         </div>
       </div>
     </div>
+
+    <script src="/assets/i18n.js"></script>
   </body>
 </html>
