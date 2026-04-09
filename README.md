@@ -15,7 +15,7 @@ Content:
 - **While you wait** card — reassures users their data is safe and no action is needed
 - **Footer** — Refresh Page button, email and Twitter support links
 
-Styles live in `assets/style.css`. Light/dark mode is handled via `html.dark` (set automatically from `prefers-color-scheme`).
+Styles live in `assets/502.css`, translations in `assets/502-i18n.js`. Light/dark mode is handled via `html.dark` (set from `localStorage` with `prefers-color-scheme` as fallback). Supports `en`, `es`, `fr`, `it`.
 
 ## Commands
 
