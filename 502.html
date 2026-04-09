@@ -11,17 +11,14 @@
     />
     <link rel="stylesheet" href="/assets/style.css" />
     <script>
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        document.documentElement.classList.add("dark");
-      }
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", function (e) {
-          document.documentElement.classList.toggle("dark", e.matches);
-        });
+      (function () {
+        var stored = localStorage.getItem("theme");
+        if (stored) {
+          document.documentElement.classList.toggle("dark", stored === "dark");
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
     </script>
   </head>
   <body>
@@ -83,7 +80,10 @@
             <!-- Theme toggle -->
             <button
               class="downtime-theme-btn"
-              onclick="document.documentElement.classList.toggle('dark')"
+              onclick="
+                var d = document.documentElement.classList.toggle('dark');
+                localStorage.setItem('theme', d ? 'dark' : 'light');
+              "
               aria-label="Toggle theme"
             >
               <svg
@@ -186,7 +186,8 @@
                     What's happening
                   </h3>
                   <p class="downtime-info-content" data-i18n="infoContent">
-                    A deploy or a small fix is in progress. No action needed on your end.
+                    A deploy or a small fix is in progress. No action needed on
+                    your end.
                   </p>
                 </div>
               </div>
