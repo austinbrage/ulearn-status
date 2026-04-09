@@ -1,5 +1,7 @@
 const translations = {
   en: {
+    pageTitle: "uLearn - We'll be right back",
+    pageDescription: "We're pushing an update or fixing something small. Back in a moment.",
     title: "We'll be right back",
     subtitle: "Hang tight \u2014 this won't take long",
     infoTitle: "What's happening",
@@ -19,6 +21,8 @@ const translations = {
     contactTwitter: "@uLearnStatus",
   },
   es: {
+    pageTitle: "uLearn - Volvemos enseguida",
+    pageDescription: "Estamos publicando una actualización o resolviendo algo pequeño. Volvemos en un momento.",
     title: "Volvemos enseguida",
     subtitle: "Un momento \u2014 esto no tardará mucho",
     infoTitle: "Qué está pasando",
@@ -38,6 +42,8 @@ const translations = {
     contactTwitter: "@uLearnStatus",
   },
   fr: {
+    pageTitle: "uLearn - On revient tout de suite",
+    pageDescription: "Nous déployons une mise à jour ou réglons quelque chose de mineur. De retour dans un instant.",
     title: "On revient tout de suite",
     subtitle: "Un instant \u2014 ça ne prendra pas longtemps",
     infoTitle: "Ce qui se passe",
@@ -57,6 +63,8 @@ const translations = {
     contactTwitter: "@uLearnStatus",
   },
   it: {
+    pageTitle: "uLearn - Torniamo subito",
+    pageDescription: "Stiamo rilasciando un aggiornamento o sistemando qualcosa di piccolo. Torniamo tra un momento.",
     title: "Torniamo subito",
     subtitle: "Un momento \u2014 ci vorrà poco",
     infoTitle: "Cosa sta succedendo",
@@ -86,7 +94,9 @@ const translations = {
   // Apply translations
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.dataset.i18n;
-    if (t[key] !== undefined) el.textContent = t[key];
+    if (t[key] === undefined) return;
+    if (el.tagName === "META") el.setAttribute("content", t[key]);
+    else el.textContent = t[key];
   });
 
   // Lang dropdown
