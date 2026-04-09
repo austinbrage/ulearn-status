@@ -35,6 +35,36 @@
       <!-- Main content -->
       <div class="downtime-content">
         <div class="downtime-card">
+          <!-- Top-right controls -->
+          <div class="downtime-controls">
+          <!-- Lang dropdown -->
+          <div class="downtime-lang" id="downtime-lang">
+            <button class="downtime-lang-btn" id="downtime-lang-btn" aria-label="Switch language">
+              <span class="downtime-lang-current" id="downtime-lang-current">en</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="downtime-lang-chevron"
+                id="downtime-lang-chevron"
+              >
+                <path d="m6 9 6 6 6-6"></path>
+              </svg>
+            </button>
+            <div class="downtime-lang-dropdown" id="downtime-lang-dropdown">
+              <a class="downtime-lang-option" data-lang="en" href="#">🇬🇧 <span>EN</span></a>
+              <a class="downtime-lang-option" data-lang="es" href="#">🇪🇸 <span>ES</span></a>
+              <a class="downtime-lang-option" data-lang="fr" href="#">🇫🇷 <span>FR</span></a>
+              <a class="downtime-lang-option" data-lang="it" href="#">🇮🇹 <span>IT</span></a>
+            </div>
+          </div>
+
           <!-- Theme toggle -->
           <button
             class="downtime-theme-btn"
@@ -73,6 +103,7 @@
               <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
             </svg>
           </button>
+          </div><!-- /.downtime-controls -->
 
           <!-- Header: icon + title, horizontal on desktop -->
           <div class="downtime-header">

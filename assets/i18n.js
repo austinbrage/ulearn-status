@@ -78,12 +78,52 @@ const translations = {
 };
 
 (function () {
-  const segment = window.location.pathname.split("/").find((s) => s.length === 2);
+  const parts = window.location.pathname.split("/");
+  const segment = parts.find((s) => s.length === 2);
   const lang = segment && translations[segment] ? segment : "en";
   const t = translations[lang];
 
+  // Apply translations
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.dataset.i18n;
     if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  // Lang dropdown
+  const btn = document.getElementById("downtime-lang-btn");
+  const dropdown = document.getElementById("downtime-lang-dropdown");
+  const chevron = document.getElementById("downtime-lang-chevron");
+  const current = document.getElementById("downtime-lang-current");
+
+  // Set current lang label and mark active option
+  current.textContent = lang;
+  document.querySelectorAll(".downtime-lang-option").forEach((el) => {
+    if (el.dataset.lang === lang) el.classList.add("downtime-lang-option-active");
+  });
+
+  // Toggle open/close
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.toggle("downtime-lang-dropdown-open");
+    chevron.classList.toggle("downtime-lang-chevron-open", isOpen);
+  });
+
+  document.addEventListener("click", () => {
+    dropdown.classList.remove("downtime-lang-dropdown-open");
+    chevron.classList.remove("downtime-lang-chevron-open");
+  });
+
+  // Switch language: replace the lang segment in the URL, or prepend it
+  document.querySelectorAll(".downtime-lang-option").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      const code = el.dataset.lang;
+      if (code === lang) return;
+      const path = window.location.pathname;
+      const newPath = segment
+        ? path.replace("/" + segment + "/", "/" + code + "/")
+        : "/" + code + path;
+      window.location.href = newPath;
+    });
   });
 })();

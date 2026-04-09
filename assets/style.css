@@ -142,11 +142,135 @@ html.dark .downtime-card {
   }
 }
 
-/* Theme toggle button */
-.downtime-theme-btn {
+/* Top-right controls wrapper */
+.downtime-controls {
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Lang dropdown */
+.downtime-lang {
+  position: relative;
+}
+
+.downtime-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  color: #374151;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  text-transform: uppercase;
+}
+
+.downtime-lang-btn:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+html.dark .downtime-lang-btn {
+  background-color: rgba(55, 65, 81, 0.7);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #e5e7eb;
+}
+
+html.dark .downtime-lang-btn:hover {
+  background-color: rgba(75, 85, 99, 0.9);
+}
+
+.downtime-lang-chevron {
+  opacity: 0.6;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.downtime-lang-chevron-open {
+  transform: rotate(180deg);
+}
+
+.downtime-lang-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.375rem);
+  right: 0;
+  min-width: 7rem;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  z-index: 100;
+}
+
+.downtime-lang-dropdown-open {
+  display: block;
+}
+
+html.dark .downtime-lang-dropdown {
+  background-color: #1f2937;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.downtime-lang-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  color: #374151;
+  text-decoration: none;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: background-color 0.1s ease;
+}
+
+.downtime-lang-option:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+html.dark .downtime-lang-option {
+  color: #e5e7eb;
+}
+
+html.dark .downtime-lang-option:hover {
+  background-color: #374151;
+  color: #f9fafb;
+}
+
+.downtime-lang-option-active {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+html.dark .downtime-lang-option-active {
+  background-color: rgba(29, 78, 216, 0.15);
+  color: #93c5fd;
+}
+
+.downtime-lang-option-active:hover {
+  background-color: #dbeafe;
+}
+
+html.dark .downtime-lang-option-active:hover {
+  background-color: rgba(29, 78, 216, 0.25);
+}
+
+/* Theme toggle button */
+.downtime-theme-btn {
   display: flex;
   align-items: center;
   justify-content: center;
