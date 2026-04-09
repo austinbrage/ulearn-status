@@ -1,12 +1,12 @@
 const translations = {
   en: {
     pageTitle: "uLearn - We'll be right back",
-    pageDescription: "We're pushing an update or fixing something small. Back in a moment.",
+    pageDescription: "A quick update or fix is in progress. Back in a moment.",
     title: "We'll be right back",
     subtitle: "Hang tight \u2014 this won't take long",
     infoTitle: "What's happening",
     infoContent:
-      "We're pushing an update or taking care of something small. Everything is fine \u2014 this is a routine part of keeping things running smoothly.",
+      "A deploy or a small fix is in progress. No action needed on your end.",
     statusText: "Usually back in",
     statusValue: "under a minute",
     waitTitle: "While you wait",
@@ -22,17 +22,18 @@ const translations = {
   },
   es: {
     pageTitle: "uLearn - Volvemos enseguida",
-    pageDescription: "Estamos publicando una actualización o resolviendo algo pequeño. Volvemos en un momento.",
+    pageDescription:
+      "Estamos publicando una actualización o resolviendo algo pequeño. Volvemos en un momento.",
     title: "Volvemos enseguida",
     subtitle: "Un momento \u2014 esto no tardará mucho",
     infoTitle: "Qué está pasando",
     infoContent:
-      "Estamos publicando una actualización o resolviendo algo pequeño. Todo está bien \u2014 esto es parte del funcionamiento normal.",
+      "Hay un despliegue o una pequeña corrección en curso. No necesitás hacer nada.",
     statusText: "Habitualmente volvemos en",
     statusValue: "menos de un minuto",
-    waitTitle: "Mientras esperas",
+    waitTitle: "Mientras esperás",
     waitItem1: "Tus datos están seguros e intactos",
-    waitItem2: "No necesitas hacer nada",
+    waitItem2: "No necesitás hacer nada",
     waitItem3: "Estaremos de vuelta antes de que te des cuenta",
     note: "Gracias por tu paciencia.",
     btnRefresh: "Recargar página",
@@ -43,12 +44,13 @@ const translations = {
   },
   fr: {
     pageTitle: "uLearn - On revient tout de suite",
-    pageDescription: "Nous déployons une mise à jour ou réglons quelque chose de mineur. De retour dans un instant.",
+    pageDescription:
+      "Nous déployons une mise à jour ou réglons quelque chose de mineur. De retour dans un instant.",
     title: "On revient tout de suite",
     subtitle: "Un instant \u2014 ça ne prendra pas longtemps",
     infoTitle: "Ce qui se passe",
     infoContent:
-      "Nous déployons une mise à jour ou réglons quelque chose de mineur. Tout va bien \u2014 c'est une partie normale du bon fonctionnement.",
+      "Un déploiement ou une correction mineure est en cours. Aucune action requise de votre part.",
     statusText: "De retour en général en",
     statusValue: "moins d'une minute",
     waitTitle: "En attendant",
@@ -64,12 +66,13 @@ const translations = {
   },
   it: {
     pageTitle: "uLearn - Torniamo subito",
-    pageDescription: "Stiamo rilasciando un aggiornamento o sistemando qualcosa di piccolo. Torniamo tra un momento.",
+    pageDescription:
+      "Stiamo rilasciando un aggiornamento o sistemando qualcosa di piccolo. Torniamo tra un momento.",
     title: "Torniamo subito",
     subtitle: "Un momento \u2014 ci vorrà poco",
     infoTitle: "Cosa sta succedendo",
     infoContent:
-      "Stiamo rilasciando un aggiornamento o sistemando qualcosa di piccolo. Va tutto bene \u2014 fa parte del normale funzionamento.",
+      "È in corso un deploy o una piccola correzione. Non devi fare nulla.",
     statusText: "Di solito torniamo in",
     statusValue: "meno di un minuto",
     waitTitle: "Nel frattempo",
