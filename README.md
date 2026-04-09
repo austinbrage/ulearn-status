@@ -17,6 +17,19 @@ Content:
 
 Styles live in `assets/502.css`, translations in `assets/502-i18n.js`. Light/dark mode is handled via `html.dark` (set from `localStorage` with `prefers-color-scheme` as fallback). Supports `en`, `es`, `fr`, `it`.
 
+### `503.html`
+
+Shown during scheduled maintenance — when the app is intentionally taken offline. Mirrors the maintenance page from the web server.
+
+Content:
+
+- **Title** — "We're Under Maintenance"
+- **Scheduled Maintenance** card — describes what's happening and estimated downtime
+- **What we're working on** card — lists improvements being made
+- **Footer** — Refresh Page button, Return to Home (links to `/:lang/home`), email and Twitter support links
+
+Styles live in `assets/503.css`, translations in `assets/503-i18n.js`. Same light/dark and i18n behaviour as `502.html`. Supports `en`, `es`, `fr`, `it`.
+
 ## Commands
 
 | Command               | Description                                         |
@@ -33,11 +46,11 @@ make setup-i18n-dev
 make serve
 ```
 
-Then open e.g. `http://localhost:3001/es/502.html` to test a specific language.
+Then open e.g. `http://localhost:3001/es/502.html` or `http://localhost:3001/es/503.html` to test a specific language.
 
 ## Deployment
 
-Configure your reverse proxy to serve `502.html` for 502 errors. Example for nginx:
+Configure your reverse proxy to serve the pages for the appropriate error codes. Example for nginx:
 
 ```nginx
 error_page 502 /502.html;
@@ -45,6 +58,13 @@ location = /502.html {
     root /path/to/ulearn-services/status;
     internal;
 }
+
+error_page 503 /503.html;
+location = /503.html {
+    root /path/to/ulearn-services/status;
+    internal;
+}
+
 location /assets/ {
     root /path/to/ulearn-services/status;
 }
