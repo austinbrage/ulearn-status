@@ -9,16 +9,18 @@ help: ## Show available commands
 	@echo "\033[36mhelp\033[0m               Show available commands"
 
 serve: ## Serve static pages locally on port 3001
-	@echo "Serving at http://localhost:3001/502.html"
+	@echo "Serving at http://localhost:3001 — open 502.html or 503.html"
 	@python3 -m http.server 3001
 
-setup-i18n-dev: ## Create lang subdirs with symlinks for i18n testing (e.g. /es/502.html)
+setup-i18n-dev: ## Create lang subdirs with symlinks for i18n testing (e.g. /es/502.html, /es/503.html)
 	@for lang in $(LANGS); do \
 		mkdir -p $$lang; \
 		ln -sf ../502.html $$lang/502.html; \
+		ln -sf ../503.html $$lang/503.html; \
 		echo "  $$lang/502.html -> ../502.html"; \
+		echo "  $$lang/503.html -> ../503.html"; \
 	done
-	@echo "Ready. Run 'make serve' then open e.g. http://localhost:3001/es/502.html"
+	@echo "Ready. Run 'make serve' then open e.g. http://localhost:3001/es/502.html or http://localhost:3001/es/503.html"
 
 clean-i18n-dev: ## Remove lang subdirs created by setup-i18n-dev
 	@for lang in $(LANGS); do \
