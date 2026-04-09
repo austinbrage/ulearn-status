@@ -45,4 +45,7 @@ location = /502.html {
     root /path/to/ulearn-services/status;
     internal;
 }
+location /assets/ {
+    root /path/to/ulearn-services/status;
+}
 ```
