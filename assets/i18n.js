@@ -98,7 +98,8 @@ const translations = {
   // Set current lang label and mark active option
   current.textContent = lang;
   document.querySelectorAll(".downtime-lang-option").forEach((el) => {
-    if (el.dataset.lang === lang) el.classList.add("downtime-lang-option-active");
+    if (el.dataset.lang === lang)
+      el.classList.add("downtime-lang-option-active");
   });
 
   // Toggle open/close

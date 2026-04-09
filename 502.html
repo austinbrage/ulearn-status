@@ -37,73 +37,88 @@
         <div class="downtime-card">
           <!-- Top-right controls -->
           <div class="downtime-controls">
-          <!-- Lang dropdown -->
-          <div class="downtime-lang" id="downtime-lang">
-            <button class="downtime-lang-btn" id="downtime-lang-btn" aria-label="Switch language">
-              <span class="downtime-lang-current" id="downtime-lang-current">en</span>
+            <!-- Lang dropdown -->
+            <div class="downtime-lang" id="downtime-lang">
+              <button
+                class="downtime-lang-btn"
+                id="downtime-lang-btn"
+                aria-label="Switch language"
+              >
+                <span class="downtime-lang-current" id="downtime-lang-current"
+                  >en</span
+                >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="downtime-lang-chevron"
+                  id="downtime-lang-chevron"
+                >
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </button>
+              <div class="downtime-lang-dropdown" id="downtime-lang-dropdown">
+                <a class="downtime-lang-option" data-lang="en" href="#"
+                  >🇬🇧 <span>EN</span></a
+                >
+                <a class="downtime-lang-option" data-lang="es" href="#"
+                  >🇪🇸 <span>ES</span></a
+                >
+                <a class="downtime-lang-option" data-lang="fr" href="#"
+                  >🇫🇷 <span>FR</span></a
+                >
+                <a class="downtime-lang-option" data-lang="it" href="#"
+                  >🇮🇹 <span>IT</span></a
+                >
+              </div>
+            </div>
+
+            <!-- Theme toggle -->
+            <button
+              class="downtime-theme-btn"
+              onclick="document.documentElement.classList.toggle('dark')"
+              aria-label="Toggle theme"
+            >
               <svg
+                class="downtime-theme-icon downtime-theme-sun"
                 xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="downtime-lang-chevron"
-                id="downtime-lang-chevron"
               >
-                <path d="m6 9 6 6 6-6"></path>
+                <circle cx="12" cy="12" r="4"></circle>
+                <path
+                  d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+                ></path>
+              </svg>
+              <svg
+                class="downtime-theme-icon downtime-theme-moon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
               </svg>
             </button>
-            <div class="downtime-lang-dropdown" id="downtime-lang-dropdown">
-              <a class="downtime-lang-option" data-lang="en" href="#">🇬🇧 <span>EN</span></a>
-              <a class="downtime-lang-option" data-lang="es" href="#">🇪🇸 <span>ES</span></a>
-              <a class="downtime-lang-option" data-lang="fr" href="#">🇫🇷 <span>FR</span></a>
-              <a class="downtime-lang-option" data-lang="it" href="#">🇮🇹 <span>IT</span></a>
-            </div>
           </div>
-
-          <!-- Theme toggle -->
-          <button
-            class="downtime-theme-btn"
-            onclick="document.documentElement.classList.toggle('dark')"
-            aria-label="Toggle theme"
-          >
-            <svg
-              class="downtime-theme-icon downtime-theme-sun"
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12" cy="12" r="4"></circle>
-              <path
-                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
-              ></path>
-            </svg>
-            <svg
-              class="downtime-theme-icon downtime-theme-moon"
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-            </svg>
-          </button>
-          </div><!-- /.downtime-controls -->
+          <!-- /.downtime-controls -->
 
           <!-- Header: icon + title, horizontal on desktop -->
           <div class="downtime-header">
@@ -134,8 +149,12 @@
             </div>
 
             <div class="downtime-title-section">
-              <h1 class="downtime-title" data-i18n="title">We'll be right back</h1>
-              <p class="downtime-subtitle" data-i18n="subtitle">Hang tight — this won't take long</p>
+              <h1 class="downtime-title" data-i18n="title">
+                We'll be right back
+              </h1>
+              <p class="downtime-subtitle" data-i18n="subtitle">
+                Hang tight — this won't take long
+              </p>
             </div>
           </div>
 
@@ -162,7 +181,9 @@
                   </svg>
                 </div>
                 <div class="downtime-info-text">
-                  <h3 class="downtime-info-title" data-i18n="infoTitle">What's happening</h3>
+                  <h3 class="downtime-info-title" data-i18n="infoTitle">
+                    What's happening
+                  </h3>
                   <p class="downtime-info-content" data-i18n="infoContent">
                     We're pushing an update or taking care of something small.
                     Everything is fine — this is a routine part of keeping
@@ -175,7 +196,9 @@
                 <div class="downtime-pulse-dot"></div>
                 <p class="downtime-status-text">
                   <span data-i18n="statusText">Usually back in</span>
-                  <span class="downtime-status-value" data-i18n="statusValue">under a minute</span>
+                  <span class="downtime-status-value" data-i18n="statusValue"
+                    >under a minute</span
+                  >
                 </p>
               </div>
             </div>
@@ -203,7 +226,9 @@
                     <circle cx="12" cy="12" r="10"></circle>
                     <path d="m9 12 2 2 4-4"></path>
                   </svg>
-                  <span class="downtime-wait-text" data-i18n="waitItem1">Your data is safe and untouched</span>
+                  <span class="downtime-wait-text" data-i18n="waitItem1"
+                    >Your data is safe and untouched</span
+                  >
                 </div>
                 <div class="downtime-wait-item">
                   <svg
@@ -221,7 +246,9 @@
                     <circle cx="12" cy="12" r="10"></circle>
                     <path d="m9 12 2 2 4-4"></path>
                   </svg>
-                  <span class="downtime-wait-text" data-i18n="waitItem2">No action needed on your end</span>
+                  <span class="downtime-wait-text" data-i18n="waitItem2"
+                    >No action needed on your end</span
+                  >
                 </div>
                 <div class="downtime-wait-item">
                   <svg
@@ -239,14 +266,18 @@
                     <circle cx="12" cy="12" r="10"></circle>
                     <path d="m9 12 2 2 4-4"></path>
                   </svg>
-                  <span class="downtime-wait-text" data-i18n="waitItem3">We'll be back before you know it</span>
+                  <span class="downtime-wait-text" data-i18n="waitItem3"
+                    >We'll be back before you know it</span
+                  >
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Closing note -->
-          <p class="downtime-note" data-i18n="note">Thanks for sticking around.</p>
+          <p class="downtime-note" data-i18n="note">
+            Thanks for sticking around.
+          </p>
 
           <!-- Footer: buttons + contact -->
           <div class="downtime-footer">
@@ -279,7 +310,11 @@
                 <span data-i18n="btnRefresh">Refresh Page</span>
               </button>
 
-              <a href="/" class="downtime-btn downtime-btn-secondary" style="display: none">
+              <a
+                href="/"
+                class="downtime-btn downtime-btn-secondary"
+                style="display: none"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -300,9 +335,14 @@
             </div>
 
             <div class="downtime-contact">
-              <p class="downtime-contact-title" data-i18n="contactTitle">Need help? Reach out</p>
+              <p class="downtime-contact-title" data-i18n="contactTitle">
+                Need help? Reach out
+              </p>
               <div class="downtime-contact-links">
-                <a href="mailto:support@ulearn.com" class="downtime-contact-link">
+                <a
+                  href="mailto:support@ulearn.com"
+                  class="downtime-contact-link"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
@@ -320,7 +360,10 @@
                   </svg>
                   <span data-i18n="contactEmail">Email</span>
                 </a>
-                <a href="https://twitter.com/uLearnStatus" class="downtime-contact-link">
+                <a
+                  href="https://twitter.com/uLearnStatus"
+                  class="downtime-contact-link"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
