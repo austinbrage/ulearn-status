@@ -102,6 +102,10 @@ const translations503 = {
     else el.textContent = t[key];
   });
 
+  // Home button — link to /:lang/home
+  var homeBtn = document.getElementById("maintenance-home-btn");
+  if (homeBtn) homeBtn.href = "/" + lang + "/home";
+
   // Lang dropdown
   const btn = document.getElementById("maintenance-lang-btn");
   const dropdown = document.getElementById("maintenance-lang-dropdown");
