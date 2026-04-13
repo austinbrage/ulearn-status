@@ -18,7 +18,7 @@ const translations = {
     btnHome: "Return to Home",
     contactTitle: "Need help? Reach out",
     contactEmail: "Email",
-    contactTwitter: "@uLearnStatus",
+    contactTwitter: "@uLearnOfficial",
   },
   es: {
     pageTitle: "uLearn - Volvemos enseguida",
@@ -40,7 +40,7 @@ const translations = {
     btnHome: "Volver al inicio",
     contactTitle: "¿Necesitas ayuda?",
     contactEmail: "Email",
-    contactTwitter: "@uLearnStatus",
+    contactTwitter: "@uLearnOfficial",
   },
   fr: {
     pageTitle: "uLearn - On revient tout de suite",
@@ -62,7 +62,7 @@ const translations = {
     btnHome: "Retour à l'accueil",
     contactTitle: "Besoin d'aide ?",
     contactEmail: "Email",
-    contactTwitter: "@uLearnStatus",
+    contactTwitter: "@uLearnOfficial",
   },
   it: {
     pageTitle: "uLearn - Torniamo subito",
@@ -84,7 +84,7 @@ const translations = {
     btnHome: "Torna alla home",
     contactTitle: "Hai bisogno di aiuto?",
     contactEmail: "Email",
-    contactTwitter: "@uLearnStatus",
+    contactTwitter: "@uLearnOfficial",
   },
 };
 
