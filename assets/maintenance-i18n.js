@@ -1,4 +1,4 @@
-const translations503 = {
+const translations = {
   en: {
     pageTitle: "uLearn - Scheduled Maintenance",
     pageDescription:
@@ -90,9 +90,9 @@ const translations503 = {
 
 (function () {
   const parts = window.location.pathname.split("/");
-  const segment = parts.find((s) => translations503[s]);
+  const segment = parts.find((s) => translations[s]);
   const lang = segment || "en";
-  const t = translations503[lang];
+  const t = translations[lang];
 
   // Apply translations
   document.querySelectorAll("[data-i18n]").forEach((el) => {
