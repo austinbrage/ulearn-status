@@ -1,0 +1,2135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="pageTitle">Master Any Language — uLearn</title>
+    <meta
+      name="description"
+      data-i18n="pageDescription"
+      content="Master any language with AI-powered flashcards, spaced repetition, and real-life conversation practice with your personal AI tutor."
+    />
+    <script>
+      (function () {
+        var stored = localStorage.getItem("theme");
+        if (stored) {
+          document.documentElement.classList.toggle("dark", stored === "dark");
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/home.css" />
+    <script defer src="/assets/home-i18n.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body>
+    <div class="home">
+      <nav class="ui-home-navbar" x-data="homeNavbar('en')">
+        <div class="ui-home-navbar-container">
+          <div class="ui-home-navbar-inner">
+            <div class="ui-home-navbar-brand">
+              <a href="/en/home" class="ui-home-navbar-title-link">
+                <h1 class="ui-home-navbar-title">Ultimate Learning</h1>
+              </a>
+              <span class="ui-home-navbar-badge">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="ui-home-navbar-badge-icon"
+                >
+                  <path
+                    d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
+                  ></path>
+                  <path d="M20 3v4"></path>
+                  <path d="M22 5h-4"></path>
+                  <path d="M4 17v2"></path>
+                  <path d="M5 18H3"></path>
+                </svg>
+                <span class="ui-home-navbar-badge-text" data-i18n="navBadge"
+                  >AI Powered</span
+                >
+              </span>
+            </div>
+            <div class="ui-home-navbar-right">
+              <button
+                class="ui-home-navbar-theme-btn"
+                @click="toggleTheme()"
+                :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+              >
+                <svg
+                  x-show="!isDark"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 2v2"></path>
+                  <path d="M12 20v2"></path>
+                  <path d="m4.93 4.93 1.41 1.41"></path>
+                  <path d="m17.66 17.66 1.41 1.41"></path>
+                  <path d="M2 12h2"></path>
+                  <path d="M20 12h2"></path>
+                  <path d="m6.34 17.66-1.41 1.41"></path>
+                  <path d="m19.07 4.93-1.41 1.41"></path>
+                </svg>
+                <svg
+                  x-show="isDark"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+              </button>
+              <div class="ui-home-navbar-lang" @click.outside="close()">
+                <button class="ui-home-navbar-lang-btn" @click="toggle()">
+                  <img
+                    :src="'/assets/flag-' + lang + '.svg'"
+                    class="ui-home-navbar-lang-flag"
+                    :alt="lang"
+                  />
+                  <span class="ui-home-navbar-lang-code" x-text="lang">en</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="ui-home-navbar-lang-chevron"
+                    :class="{ 'ui-home-navbar-lang-chevron-open': open }"
+                  >
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+                <div class="ui-home-navbar-lang-dropdown" x-show="open" x-cloak>
+                  <a
+                    :href="langUrl('en')"
+                    class="ui-home-navbar-lang-option"
+                    :class="{ 'ui-home-navbar-lang-option-active': isActive('en') }"
+                  >
+                    <img
+                      src="/assets/flag-en.svg"
+                      class="ui-home-navbar-lang-flag"
+                      alt="en"
+                    />
+                    <span>en</span>
+                  </a>
+                  <a
+                    :href="langUrl('es')"
+                    class="ui-home-navbar-lang-option"
+                    :class="{ 'ui-home-navbar-lang-option-active': isActive('es') }"
+                  >
+                    <img
+                      src="/assets/flag-es.svg"
+                      class="ui-home-navbar-lang-flag"
+                      alt="es"
+                    />
+                    <span>es</span>
+                  </a>
+                  <a
+                    :href="langUrl('it')"
+                    class="ui-home-navbar-lang-option"
+                    :class="{ 'ui-home-navbar-lang-option-active': isActive('it') }"
+                  >
+                    <img
+                      src="/assets/flag-it.svg"
+                      class="ui-home-navbar-lang-flag"
+                      alt="it"
+                    />
+                    <span>it</span>
+                  </a>
+                  <a
+                    :href="langUrl('fr')"
+                    class="ui-home-navbar-lang-option"
+                    :class="{ 'ui-home-navbar-lang-option-active': isActive('fr') }"
+                  >
+                    <img
+                      src="/assets/flag-fr.svg"
+                      class="ui-home-navbar-lang-flag"
+                      alt="fr"
+                    />
+                    <span>fr</span>
+                  </a>
+                </div>
+              </div>
+              <div class="ui-home-navbar-auth">
+                <a
+                  href="/en/user/signin"
+                  data-lang-href="user/signin"
+                  class="ui-home-navbar-cta-outline"
+                  data-i18n="navSignIn"
+                  >Sign In</a
+                >
+                <a
+                  href="/en/user/signup"
+                  data-lang-href="user/signup"
+                  class="ui-home-navbar-cta"
+                >
+                  <span data-i18n="navSignUp">Sign Up</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="ui-home-navbar-cta-icon"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main>
+        <section class="ui-home-hero" x-data="{ isTourDropdownOpen: false }">
+          <!-- Background orbs -->
+          <div class="ui-home-hero-bg">
+            <div class="ui-home-hero-orb ui-home-hero-orb-blue"></div>
+            <div class="ui-home-hero-orb ui-home-hero-orb-purple"></div>
+            <div class="ui-home-hero-orb ui-home-hero-orb-indigo"></div>
+          </div>
+
+          <!-- Floating words (desktop only) -->
+          <!-- prettier-ignore -->
+          <div class="ui-home-hero-floating" aria-hidden="true">
+            <div class="ui-home-hero-float ui-home-hero-float-1">
+              <span class="ui-home-hero-float-word">Dominar</span>
+              <span class="ui-home-hero-float-translation">To master</span>
+            </div>
+            <div class="ui-home-hero-float ui-home-hero-float-2">
+              <span class="ui-home-hero-float-word">Meistern</span>
+              <span class="ui-home-hero-float-translation">To master</span>
+            </div>
+            <div class="ui-home-hero-float ui-home-hero-float-3">
+              <span class="ui-home-hero-float-word">上達</span>
+              <span class="ui-home-hero-float-translation">Improvement</span>
+            </div>
+            <div class="ui-home-hero-float ui-home-hero-float-4">
+              <span class="ui-home-hero-float-word">Réussir</span>
+              <span class="ui-home-hero-float-translation">To succeed</span>
+            </div>
+            <div class="ui-home-hero-float ui-home-hero-float-5">
+              <span class="ui-home-hero-float-word">Flüssig</span>
+              <span class="ui-home-hero-float-translation">Fluent</span>
+            </div>
+            <div class="ui-home-hero-float ui-home-hero-float-6">
+              <span class="ui-home-hero-float-word">Avanzar</span>
+              <span class="ui-home-hero-float-translation">To advance</span>
+            </div>
+          </div>
+
+          <!-- Main content -->
+          <div class="ui-home-hero-content">
+            <!-- Badge -->
+            <div class="ui-home-hero-badge-wrapper">
+              <div class="ui-home-hero-badge">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="ui-home-hero-badge-icon"
+                >
+                  <path
+                    d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
+                  ></path>
+                  <path d="M20 3v4"></path>
+                  <path d="M22 5h-4"></path>
+                  <path d="M4 17v2"></path>
+                  <path d="M5 18H3"></path>
+                </svg>
+                <span class="ui-home-hero-badge-text" data-i18n="heroBadge"
+                  >AI-Powered Language Learning</span
+                >
+              </div>
+            </div>
+
+            <!-- Heading -->
+            <h1 class="ui-home-hero-heading">
+              <span
+                class="ui-home-hero-heading-line ui-home-hero-heading-line-lg"
+              >
+                <span data-i18n="heroHeading1">Language Learning for</span>
+                <span
+                  class="ui-home-hero-heading-gradient-blue"
+                  data-i18n="heroGradient1"
+                  >Polyglots</span
+                >
+              </span>
+              <span
+                class="ui-home-hero-heading-line ui-home-hero-heading-line-md"
+              >
+                <span data-i18n="heroHeading2">Built</span>
+                <span
+                  class="ui-home-hero-heading-gradient-purple"
+                  data-i18n="heroGradient2"
+                  >Minimalist</span
+                >
+              </span>
+            </h1>
+
+            <!-- Description -->
+            <p class="ui-home-hero-description" data-i18n="heroDesc">
+              A clean, distraction-free platform designed for language
+              enthusiasts. Master any language with AI-powered tools that
+              respect your focus and amplify your potential.
+            </p>
+
+            <!-- CTA buttons -->
+            <div class="ui-home-hero-actions">
+              <a
+                href="/en/user/signup"
+                data-lang-href="user/signup"
+                class="ui-home-hero-btn ui-home-hero-btn-primary"
+              >
+                <span data-i18n="heroCta">Start Learning Free</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="ui-home-hero-btn-icon"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+
+              <div
+                class="ui-home-hero-dropdown"
+                @click.outside="isTourDropdownOpen = false"
+              >
+                <div
+                  class="ui-home-hero-dropdown-menu"
+                  x-show="isTourDropdownOpen"
+                  style="display: none"
+                >
+                  <a
+                    href="/en/tour/dashboard"
+                    class="ui-home-hero-dropdown-item"
+                    data-i18n="heroTourDashboard"
+                    >Dashboard</a
+                  >
+                  <a
+                    href="/en/tour/review"
+                    class="ui-home-hero-dropdown-item"
+                    data-i18n="heroTourReview"
+                    >Review Mode</a
+                  >
+                  <a
+                    href="/en/tour/tutor/session"
+                    class="ui-home-hero-dropdown-item"
+                    data-i18n="heroTourTutor"
+                    >Tutor</a
+                  >
+                  <a
+                    href="/en/tour/learn/text"
+                    class="ui-home-hero-dropdown-item"
+                    data-i18n="heroTourLearn"
+                    >Learn Mode</a
+                  >
+                </div>
+                <button
+                  class="ui-home-hero-btn ui-home-hero-btn-outline"
+                  :class="{ 'ui-home-hero-btn-outline-active': isTourDropdownOpen }"
+                  @click="isTourDropdownOpen = !isTourDropdownOpen"
+                  type="button"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="ui-home-hero-btn-icon"
+                  >
+                    <path
+                      d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"
+                    ></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                  </svg>
+                  <span data-i18n="heroTour">Take a Tour</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Feature cards -->
+            <div class="ui-home-hero-features">
+              <div class="ui-home-hero-feature">
+                <div
+                  class="ui-home-hero-feature-icon ui-home-hero-feature-icon-blue"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="ui-home-hero-feature-svg"
+                  >
+                    <path d="M12 7v14"></path>
+                    <path
+                      d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3
+                  class="ui-home-hero-feature-title"
+                  data-i18n="heroFeature1Title"
+                >
+                  Learn Mode
+                </h3>
+                <p
+                  class="ui-home-hero-feature-desc"
+                  data-i18n="heroFeature1Desc"
+                >
+                  Select unknown words from level-appropriate texts and create
+                  flashcards instantly
+                </p>
+              </div>
+              <div class="ui-home-hero-feature">
+                <div
+                  class="ui-home-hero-feature-icon ui-home-hero-feature-icon-purple"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="ui-home-hero-feature-svg"
+                  >
+                    <path
+                      d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3
+                  class="ui-home-hero-feature-title"
+                  data-i18n="heroFeature2Title"
+                >
+                  Cards Review & AI Tutor
+                </h3>
+                <p
+                  class="ui-home-hero-feature-desc"
+                  data-i18n="heroFeature2Desc"
+                >
+                  Reinforce vocabulary with spaced repetition card reviews and
+                  practice real conversations with your AI tutor
+                </p>
+              </div>
+              <div class="ui-home-hero-feature">
+                <div
+                  class="ui-home-hero-feature-icon ui-home-hero-feature-icon-indigo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="ui-home-hero-feature-svg"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="6"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                  </svg>
+                </div>
+                <h3
+                  class="ui-home-hero-feature-title"
+                  data-i18n="heroFeature3Title"
+                >
+                  Smart Organization
+                </h3>
+                <p
+                  class="ui-home-hero-feature-desc"
+                  data-i18n="heroFeature3Desc"
+                >
+                  Organize your vocabulary with custom collections and groups
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ui-home-demo">
+          <!-- Background orbs -->
+          <div class="ui-home-demo-bg">
+            <div class="ui-home-demo-orb ui-home-demo-orb-blue"></div>
+            <div class="ui-home-demo-orb ui-home-demo-orb-purple"></div>
+            <div class="ui-home-demo-orb ui-home-demo-orb-indigo"></div>
+          </div>
+
+          <!-- Content -->
+          <div class="ui-home-demo-container">
+            <!-- Section Title -->
+            <div class="ui-home-demo-header">
+              <!-- Badge -->
+              <div class="ui-home-demo-badge-wrapper">
+                <div class="ui-home-demo-badge">
+                  <div class="ui-home-demo-badge-icon-wrapper">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="ui-home-demo-badge-icon"
+                    >
+                      <path
+                        d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
+                      ></path>
+                      <path d="M20 3v4"></path>
+                      <path d="M22 5h-4"></path>
+                      <path d="M4 17v2"></path>
+                      <path d="M5 18H3"></path>
+                    </svg>
+                  </div>
+                  <span class="ui-home-demo-badge-text" data-i18n="demoBadge"
+                    >Product Demo</span
+                  >
+                </div>
+              </div>
+
+              <!-- Heading -->
+              <h2 class="ui-home-demo-heading">
+                <span data-i18n="demoHeading1">See</span>
+                <span
+                  class="ui-home-demo-heading-gradient"
+                  data-i18n="demoHeading2"
+                  >uLearn</span
+                >
+                <span data-i18n="demoHeading3">in Action</span>
+              </h2>
+
+              <!-- Description (inner highlight spans — left in English) -->
+              <p class="ui-home-demo-description">
+                Watch how our
+                <span class="ui-home-demo-description-highlight"
+                  >minimalist design</span
+                >
+                and
+                <span class="ui-home-demo-description-highlight"
+                  >powerful features</span
+                >
+                work together to create
+                <span class="ui-home-demo-description-gradient"
+                  >the perfect learning experience</span
+                >
+              </p>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="ui-home-demo-grid">
+              <!-- Large Feature Card - Flashcard Animation -->
+              <div class="ui-home-demo-card ui-home-demo-card-large">
+                <div
+                  class="ui-home-demo-card-gradient ui-home-demo-card-gradient-blue"
+                ></div>
+                <div class="ui-home-demo-card-inner">
+                  <span class="ui-home-demo-pill ui-home-demo-pill-blue"
+                    >Smart Flashcards</span
+                  >
+                  <!-- prettier-ignore -->
+                  <div class="ui-home-demo-flashcard-scene">
+                    <div class="ui-home-demo-flashcard">
+                      <div class="ui-home-demo-flashcard-face ui-home-demo-flashcard-front">
+                        <div class="ui-home-demo-flashcard-top">
+                          <span class="ui-home-demo-pill ui-home-demo-pill-green ui-home-demo-pill-sm">Verb</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ui-home-demo-flashcard-volume">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                          </svg>
+                        </div>
+                        <div class="ui-home-demo-flashcard-word-block">
+                          <div class="ui-home-demo-flashcard-word">lernen</div>
+                          <div class="ui-home-demo-flashcard-pronunciation">/ˈlɛʁnən/</div>
+                        </div>
+                        <div class="ui-home-demo-flashcard-translation-block">
+                          <div class="ui-home-demo-flashcard-label">Translation</div>
+                          <div class="ui-home-demo-flashcard-translation">to learn</div>
+                        </div>
+                        <div class="ui-home-demo-flashcard-progress">
+                          <div class="ui-home-demo-flashcard-bar ui-home-demo-flashcard-bar-filled"></div>
+                          <div class="ui-home-demo-flashcard-bar ui-home-demo-flashcard-bar-filled"></div>
+                          <div class="ui-home-demo-flashcard-bar ui-home-demo-flashcard-bar-filled"></div>
+                          <div class="ui-home-demo-flashcard-bar ui-home-demo-flashcard-bar-empty"></div>
+                          <div class="ui-home-demo-flashcard-bar ui-home-demo-flashcard-bar-empty"></div>
+                        </div>
+                      </div>
+                      <div class="ui-home-demo-flashcard-face ui-home-demo-flashcard-back">
+                        <div class="ui-home-demo-flashcard-top">
+                          <span class="ui-home-demo-pill ui-home-demo-pill-blue ui-home-demo-pill-sm">Translation</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ui-home-demo-flashcard-volume">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                          </svg>
+                        </div>
+                        <div class="ui-home-demo-flashcard-word-block">
+                          <div class="ui-home-demo-flashcard-word">to learn</div>
+                          <div class="ui-home-demo-flashcard-word-original">lernen</div>
+                        </div>
+                        <div class="ui-home-demo-flashcard-progress">
+                          <div class="ui-home-demo-flashcard-bar ui-home-demo-flashcard-bar-filled"></div>
+                          <div class="ui-home-demo-flashcard-bar ui-home-demo-flashcard-bar-filled"></div>
+                          <div class="ui-home-demo-flashcard-bar ui-home-demo-flashcard-bar-filled"></div>
+                          <div class="ui-home-demo-flashcard-bar ui-home-demo-flashcard-bar-empty"></div>
+                          <div class="ui-home-demo-flashcard-bar ui-home-demo-flashcard-bar-empty"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="ui-home-demo-flashcard-caption">
+                    Beautiful, interactive flashcards with pronunciation guides
+                    and progress tracking
+                  </p>
+                </div>
+              </div>
+
+              <!-- Right Column - Two Stacked Cards -->
+              <!-- prettier-ignore -->
+              <div class="ui-home-demo-col-right">
+                <!-- AI Chat Feature -->
+                <div class="ui-home-demo-card ui-home-demo-card-sm">
+                  <div class="ui-home-demo-card-gradient ui-home-demo-card-gradient-purple"></div>
+                  <div class="ui-home-demo-card-inner-top">
+                    <span class="ui-home-demo-pill ui-home-demo-pill-purple">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                      </svg>
+                      AI Assistant
+                    </span>
+                    <div class="ui-home-demo-chat">
+                      <div class="ui-home-demo-chat-row">
+                        <div class="ui-home-demo-chat-avatar ui-home-demo-chat-avatar-ai">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                            <path d="M20 3v4"></path>
+                            <path d="M22 5h-4"></path>
+                            <path d="M4 17v2"></path>
+                            <path d="M5 18H3"></path>
+                          </svg>
+                        </div>
+                        <div class="ui-home-demo-chat-bubble ui-home-demo-chat-bubble-ai">
+                          Try using "haben" in a sentence!
+                        </div>
+                      </div>
+                      <div class="ui-home-demo-chat-row ui-home-demo-chat-row-user">
+                        <div class="ui-home-demo-chat-bubble ui-home-demo-chat-bubble-user">
+                          Ich habe ein Buch
+                        </div>
+                        <div class="ui-home-demo-chat-avatar ui-home-demo-chat-avatar-user"></div>
+                      </div>
+                      <div class="ui-home-demo-chat-row ui-home-demo-chat-typing">
+                        <div class="ui-home-demo-chat-avatar ui-home-demo-chat-avatar-ai">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                            <path d="M20 3v4"></path>
+                            <path d="M22 5h-4"></path>
+                            <path d="M4 17v2"></path>
+                            <path d="M5 18H3"></path>
+                          </svg>
+                        </div>
+                        <div class="ui-home-demo-chat-dots">
+                          <span class="ui-home-demo-chat-dot ui-home-demo-chat-dot-1"></span>
+                          <span class="ui-home-demo-chat-dot ui-home-demo-chat-dot-2"></span>
+                          <span class="ui-home-demo-chat-dot ui-home-demo-chat-dot-3"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Stats Feature -->
+                <!-- prettier-ignore -->
+                <div class="ui-home-demo-card ui-home-demo-card-sm">
+                  <div class="ui-home-demo-card-gradient ui-home-demo-card-gradient-indigo"></div>
+                  <div class="ui-home-demo-card-inner-top">
+                    <span class="ui-home-demo-pill ui-home-demo-pill-indigo">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 3v18h18"></path>
+                        <path d="M7 16v-5"></path>
+                        <path d="M11 16V8"></path>
+                        <path d="M15 16v-3"></path>
+                      </svg>
+                      Progress Tracking
+                    </span>
+                    <div class="ui-home-demo-bars">
+                      <div class="ui-home-demo-bar" style="--bar-h: 20%"></div>
+                      <div class="ui-home-demo-bar" style="--bar-h: 45%"></div>
+                      <div class="ui-home-demo-bar" style="--bar-h: 30%"></div>
+                      <div class="ui-home-demo-bar" style="--bar-h: 60%"></div>
+                      <div class="ui-home-demo-bar" style="--bar-h: 35%"></div>
+                      <div class="ui-home-demo-bar" style="--bar-h: 70%"></div>
+                      <div class="ui-home-demo-bar" style="--bar-h: 50%"></div>
+                    </div>
+                    <div class="ui-home-demo-stats">
+                      <div class="ui-home-demo-stat">
+                        <div class="ui-home-demo-stat-value">847</div>
+                        <div class="ui-home-demo-stat-label">Words Learned</div>
+                      </div>
+                      <div class="ui-home-demo-stat">
+                        <div class="ui-home-demo-stat-value">94%</div>
+                        <div class="ui-home-demo-stat-label">Accuracy</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bottom Row - Three Cards -->
+              <!-- Card 1: Audio Pronunciation -->
+              <div class="ui-home-demo-card ui-home-demo-card-bottom">
+                <div
+                  class="ui-home-demo-card-gradient ui-home-demo-card-gradient-orange"
+                ></div>
+                <div class="ui-home-demo-card-inner-top">
+                  <span class="ui-home-demo-pill ui-home-demo-pill-orange">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"
+                      ></path>
+                    </svg>
+                    Audio Pronunciation
+                  </span>
+                  <div class="ui-home-demo-audio">
+                    <div class="ui-home-demo-audio-row">
+                      <div class="ui-home-demo-audio-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <polygon
+                            points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"
+                          ></polygon>
+                          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <div class="ui-home-demo-audio-word">Guten Morgen</div>
+                        <div class="ui-home-demo-audio-ipa">
+                          /ˈɡuːtn̩ ˈmɔʁɡn̩/
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ui-home-demo-waveform-track">
+                      <div class="ui-home-demo-waveform-fill"></div>
+                      <div class="ui-home-demo-waveform-bars">
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 30%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 55%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 70%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 45%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 80%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 35%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 60%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 75%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 40%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 65%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 50%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 85%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 40%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 60%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 30%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 70%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 45%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 55%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 35%"
+                        ></span>
+                        <span
+                          class="ui-home-demo-waveform-bar"
+                          style="--wh: 25%"
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2: Collections -->
+              <div class="ui-home-demo-card ui-home-demo-card-bottom">
+                <div
+                  class="ui-home-demo-card-gradient ui-home-demo-card-gradient-green"
+                ></div>
+                <div class="ui-home-demo-card-inner-top">
+                  <span class="ui-home-demo-pill ui-home-demo-pill-green">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M12 7v14"></path>
+                      <path
+                        d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+                      ></path>
+                    </svg>
+                    Collections
+                  </span>
+                  <div class="ui-home-demo-collections">
+                    <div class="ui-home-demo-collection-row">
+                      <div
+                        class="ui-home-demo-collection-icon ui-home-demo-collection-icon-blue"
+                      >
+                        🏠
+                      </div>
+                      <div>
+                        <div class="ui-home-demo-collection-name">
+                          Daily Vocabulary
+                        </div>
+                        <div class="ui-home-demo-collection-count">
+                          45 words
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ui-home-demo-collection-row">
+                      <div
+                        class="ui-home-demo-collection-icon ui-home-demo-collection-icon-purple"
+                      >
+                        ✈️
+                      </div>
+                      <div>
+                        <div class="ui-home-demo-collection-name">
+                          Travel Phrases
+                        </div>
+                        <div class="ui-home-demo-collection-count">
+                          28 phrases
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3: Smart Review -->
+              <div class="ui-home-demo-card ui-home-demo-card-bottom">
+                <div
+                  class="ui-home-demo-card-gradient ui-home-demo-card-gradient-pink"
+                ></div>
+                <div class="ui-home-demo-card-inner-top">
+                  <span class="ui-home-demo-pill ui-home-demo-pill-pink">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"
+                      ></path>
+                      <path
+                        d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"
+                      ></path>
+                      <path
+                        d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"
+                      ></path>
+                      <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path>
+                      <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path>
+                      <path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path>
+                      <path d="M19.938 10.5a4 4 0 0 1 .585.396"></path>
+                      <path d="M6 18a4 4 0 0 1-1.967-.516"></path>
+                      <path d="M19.967 17.484A4 4 0 0 1 18 18"></path>
+                    </svg>
+                    Smart Review
+                  </span>
+                  <div class="ui-home-demo-srs">
+                    <div class="ui-home-demo-srs-header">
+                      <div class="ui-home-demo-srs-label">Next review in</div>
+                      <div class="ui-home-demo-srs-value">2h</div>
+                    </div>
+                    <div class="ui-home-demo-srs-track">
+                      <div class="ui-home-demo-srs-fill"></div>
+                    </div>
+                    <div class="ui-home-demo-srs-hint">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                      Optimal timing based on your learning pattern
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Feature Pills -->
+            <div class="ui-home-demo-pills">
+              <div class="ui-home-demo-feature-pill">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="ui-home-demo-feature-pill-icon ui-home-demo-feature-pill-icon-blue"
+                >
+                  <path
+                    d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
+                  ></path>
+                  <path d="M20 3v4"></path>
+                  <path d="M22 5h-4"></path>
+                  <path d="M4 17v2"></path>
+                  <path d="M5 18H3"></path>
+                </svg>
+                AI-Powered
+              </div>
+              <div class="ui-home-demo-feature-pill">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="ui-home-demo-feature-pill-icon ui-home-demo-feature-pill-icon-purple"
+                >
+                  <path
+                    d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
+                  ></path>
+                </svg>
+                Interactive Learning
+              </div>
+              <div class="ui-home-demo-feature-pill">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="ui-home-demo-feature-pill-icon ui-home-demo-feature-pill-icon-indigo"
+                >
+                  <path
+                    d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"
+                  ></path>
+                  <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                Personalized Experience
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ui-home-stats">
+          <div class="ui-home-stats-container">
+            <div class="ui-home-stats-grid">
+              <div class="ui-home-stats-item">
+                <div
+                  class="ui-home-stats-value ui-home-stats-value-blue-purple"
+                >
+                  1000+
+                </div>
+                <div class="ui-home-stats-label" data-i18n="statLabel1">
+                  Words & Phrases
+                </div>
+              </div>
+              <div class="ui-home-stats-item">
+                <div
+                  class="ui-home-stats-value ui-home-stats-value-purple-indigo"
+                >
+                  500+
+                </div>
+                <div class="ui-home-stats-label" data-i18n="statLabel2">
+                  Common Phrases
+                </div>
+              </div>
+              <div class="ui-home-stats-item">
+                <div
+                  class="ui-home-stats-value ui-home-stats-value-indigo-blue"
+                >
+                  A1-C2
+                </div>
+                <div class="ui-home-stats-label" data-i18n="statLabel3">
+                  CEFR Levels
+                </div>
+              </div>
+              <div class="ui-home-stats-item">
+                <div
+                  class="ui-home-stats-value ui-home-stats-value-blue-purple"
+                >
+                  24/7
+                </div>
+                <div class="ui-home-stats-label" data-i18n="statLabel4">
+                  AI Assistance
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ui-home-steps">
+          <div class="ui-home-steps-container">
+            <div class="ui-home-steps-header">
+              <h2 class="ui-home-steps-title" data-i18n="stepsTitle">
+                How It Works
+              </h2>
+              <p class="ui-home-steps-subtitle" data-i18n="stepsSubtitle">
+                Start learning in three simple steps
+              </p>
+            </div>
+            <div class="ui-home-steps-grid">
+              <div class="ui-home-steps-item">
+                <div class="ui-home-steps-icon-box">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="ui-home-steps-icon ui-home-steps-icon-blue"
+                  >
+                    <path d="M12 7v14"></path>
+                    <path
+                      d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+                    ></path>
+                  </svg>
+                </div>
+                <div
+                  class="ui-home-steps-number ui-home-steps-number-blue-purple"
+                >
+                  1
+                </div>
+                <h3 class="ui-home-steps-item-title" data-i18n="step1Title">
+                  Choose Your Level
+                </h3>
+                <p class="ui-home-steps-item-desc" data-i18n="step1Desc">
+                  Select your current proficiency level from A1 to C2 and get
+                  personalized content
+                </p>
+              </div>
+              <div class="ui-home-steps-item">
+                <div class="ui-home-steps-icon-box">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="ui-home-steps-icon ui-home-steps-icon-purple"
+                  >
+                    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                  </svg>
+                </div>
+                <div
+                  class="ui-home-steps-number ui-home-steps-number-purple-indigo"
+                >
+                  2
+                </div>
+                <h3 class="ui-home-steps-item-title" data-i18n="step2Title">
+                  Practice Your Way
+                </h3>
+                <p class="ui-home-steps-item-desc" data-i18n="step2Desc">
+                  Choose active practice with AI conversations or passive
+                  practice with reading comprehension
+                </p>
+              </div>
+              <div class="ui-home-steps-item">
+                <div class="ui-home-steps-icon-box">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="ui-home-steps-icon ui-home-steps-icon-indigo"
+                  >
+                    <path
+                      d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"
+                    ></path>
+                    <path
+                      d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"
+                    ></path>
+                    <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path>
+                    <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path>
+                    <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path>
+                    <path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path>
+                    <path d="M19.938 10.5a4 4 0 0 1 .585.396"></path>
+                    <path d="M6 18a4 4 0 0 1-1.967-.516"></path>
+                    <path d="M19.967 17.484A4 4 0 0 1 18 18"></path>
+                  </svg>
+                </div>
+                <div
+                  class="ui-home-steps-number ui-home-steps-number-indigo-blue"
+                >
+                  3
+                </div>
+                <h3 class="ui-home-steps-item-title" data-i18n="step3Title">
+                  Organize & Build
+                </h3>
+                <p class="ui-home-steps-item-desc" data-i18n="step3Desc">
+                  Create custom collections and groups to organize your growing
+                  vocabulary library
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ui-home-pricing" id="pricing">
+          <div class="ui-home-pricing-container">
+            <div class="ui-home-pricing-header">
+              <h2 class="ui-home-pricing-title" data-i18n="pricingTitle">
+                Choose Your Plan
+              </h2>
+              <p class="ui-home-pricing-subtitle" data-i18n="pricingSubtitle">
+                Start free, upgrade when you're ready
+              </p>
+            </div>
+
+            <!-- Billing Toggle -->
+            <!-- prettier-ignore -->
+            <div class="ui-home-pricing-toggle">
+              <span class="ui-home-pricing-toggle-label" data-i18n="pricingMonthly">Monthly</span>
+              <button class="ui-home-pricing-toggle-btn" id="billing-toggle" onclick="toggleBilling()">
+                <span class="ui-home-pricing-toggle-slider"></span>
+              </button>
+              <span class="ui-home-pricing-toggle-label">
+                <span data-i18n="pricingAnnually">Annually</span>
+                <span class="ui-home-pricing-toggle-save" data-i18n="pricingSave">Save 20%</span>
+              </span>
+            </div>
+
+            <!-- Plans Grid -->
+            <div class="ui-home-pricing-grid">
+              <!-- Free Plan -->
+              <!-- prettier-ignore -->
+              <div x-data @click="if (!$event.target.closest('a')) $refs.cta.click()" class="ui-home-pricing-card">
+                <div class="ui-home-pricing-card-header">
+                  <h3 class="ui-home-pricing-plan-name" data-i18n="pricingFreeName">Free</h3>
+                  <p class="ui-home-pricing-plan-desc" data-i18n="pricingFreeDesc">Perfect for getting started</p>
+                  <div class="ui-home-pricing-price">
+                    <div class="ui-home-pricing-price-monthly">
+                      <span class="ui-home-pricing-price-amount"><span>$</span>0</span>
+                      <span class="ui-home-pricing-price-period">/mo</span>
+                    </div>
+                    <div class="ui-home-pricing-price-annually">
+                      <span class="ui-home-pricing-price-amount"><span>$</span>0</span>
+                      <span class="ui-home-pricing-price-period">/yr</span>
+                    </div>
+                  </div>
+                  <a x-ref="cta" href="/en/user/signup" data-lang-href="user/signup" class="ui-home-pricing-cta ui-home-pricing-cta-free" data-i18n="pricingCtaFree">Get Started Free</a>
+                </div>
+                <ul class="ui-home-pricing-features">
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName1">AI Cards Generation</span>
+                    <span class="ui-home-pricing-feature-value">30</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName2">AI Word Lookups</span>
+                    <span class="ui-home-pricing-feature-value">40</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName3">Card Chat Messages</span>
+                    <span class="ui-home-pricing-feature-value">40</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName4">Text Chat Messages</span>
+                    <span class="ui-home-pricing-feature-value">40</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName5">Quiz Chat Messages</span>
+                    <span class="ui-home-pricing-feature-value">40</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName6">Tutor Chat Messages</span>
+                    <span class="ui-home-pricing-feature-value">30</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Pro Plan -->
+              <!-- prettier-ignore -->
+              <div x-data @click="if (!$event.target.closest('a')) $refs.cta.click()" class="ui-home-pricing-card ui-home-pricing-card-pro">
+                <div class="ui-home-pricing-badge">Popular</div>
+                <div class="ui-home-pricing-card-header">
+                  <h3 class="ui-home-pricing-plan-name" data-i18n="pricingProName">Pro</h3>
+                  <p class="ui-home-pricing-plan-desc" data-i18n="pricingProDesc">For dedicated language learners</p>
+                  <div class="ui-home-pricing-price">
+                    <div class="ui-home-pricing-price-monthly">
+                      <span class="ui-home-pricing-price-amount"><span>$</span>9</span>
+                      <span class="ui-home-pricing-price-period">/mo</span>
+                    </div>
+                    <div class="ui-home-pricing-price-annually">
+                      <span class="ui-home-pricing-price-amount"><span>$</span>90</span>
+                      <span class="ui-home-pricing-price-period">/yr</span>
+                    </div>
+                  </div>
+                  <a x-ref="cta" href="/en/user/signup" data-lang-href="user/signup" class="ui-home-pricing-cta ui-home-pricing-cta-pro" data-i18n="pricingCtaPro">Get Pro</a>
+                </div>
+                <ul class="ui-home-pricing-features">
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check ui-home-pricing-feature-check-pro">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName1">AI Cards Generation</span>
+                    <span class="ui-home-pricing-feature-value">300</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check ui-home-pricing-feature-check-pro">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName2">AI Word Lookups</span>
+                    <span class="ui-home-pricing-feature-value">500</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check ui-home-pricing-feature-check-pro">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName3">Card Chat Messages</span>
+                    <span class="ui-home-pricing-feature-value">500</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check ui-home-pricing-feature-check-pro">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName4">Text Chat Messages</span>
+                    <span class="ui-home-pricing-feature-value">500</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check ui-home-pricing-feature-check-pro">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName5">Quiz Chat Messages</span>
+                    <span class="ui-home-pricing-feature-value">500</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check ui-home-pricing-feature-check-pro">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName6">Tutor Chat Messages</span>
+                    <span class="ui-home-pricing-feature-value">1000</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Premium Plan -->
+              <!-- prettier-ignore -->
+              <div x-data @click="if (!$event.target.closest('a')) $refs.cta.click()" class="ui-home-pricing-card">
+                <div class="ui-home-pricing-card-header">
+                  <h3 class="ui-home-pricing-plan-name" data-i18n="pricingPremiumName">Premium</h3>
+                  <p class="ui-home-pricing-plan-desc" data-i18n="pricingPremiumDesc">For serious language learners</p>
+                  <div class="ui-home-pricing-price">
+                    <div class="ui-home-pricing-price-monthly">
+                      <span class="ui-home-pricing-price-amount"><span>$</span>19</span>
+                      <span class="ui-home-pricing-price-period">/mo</span>
+                    </div>
+                    <div class="ui-home-pricing-price-annually">
+                      <span class="ui-home-pricing-price-amount"><span>$</span>190</span>
+                      <span class="ui-home-pricing-price-period">/yr</span>
+                    </div>
+                  </div>
+                  <a x-ref="cta" href="/en/user/signup" data-lang-href="user/signup" class="ui-home-pricing-cta ui-home-pricing-cta-premium" data-i18n="pricingCtaPremium">Get Premium</a>
+                </div>
+                <ul class="ui-home-pricing-features">
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName1">AI Cards Generation</span>
+                    <span class="ui-home-pricing-feature-value">Unlimited</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName2">AI Word Lookups</span>
+                    <span class="ui-home-pricing-feature-value">3000</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName3">Card Chat Messages</span>
+                    <span class="ui-home-pricing-feature-value">Unlimited</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName4">Text Chat Messages</span>
+                    <span class="ui-home-pricing-feature-value">Unlimited</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName5">Quiz Chat Messages</span>
+                    <span class="ui-home-pricing-feature-value">Unlimited</span>
+                  </li>
+                  <li class="ui-home-pricing-feature">
+                    <span class="ui-home-pricing-feature-check">✓</span>
+                    <span class="ui-home-pricing-feature-name" data-i18n="featureName6">Tutor Chat Messages</span>
+                    <span class="ui-home-pricing-feature-value">3000</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="ui-home-pricing-full-link">
+              <a href="/en/home/pricing" class="ui-home-pricing-full-link-btn">
+                <span data-i18n="pricingFullLink"
+                  >See full feature comparison</span
+                >
+                <span class="ui-home-pricing-full-link-arrow">→</span>
+              </a>
+            </div>
+          </div>
+
+          <script>
+            function toggleBilling() {
+              var section = document.getElementById("pricing");
+              var btn = document.getElementById("billing-toggle");
+              section.classList.toggle("is-annually");
+              btn.classList.toggle("is-active");
+            }
+          </script>
+        </section>
+
+        <section class="ui-home-features" id="features">
+          <div class="ui-home-features-container">
+            <div class="ui-home-features-header">
+              <h2 class="ui-home-features-title" data-i18n="featuresTitle">
+                Powerful Features
+              </h2>
+              <p class="ui-home-features-subtitle" data-i18n="featuresSubtitle">
+                Everything you need to master any language effectively
+              </p>
+            </div>
+            <div class="ui-home-features-grid">
+              <div class="ui-home-features-card">
+                <div
+                  class="ui-home-features-icon-box ui-home-features-icon-box-blue-purple"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 7v14"></path>
+                    <path
+                      d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3
+                  class="ui-home-features-card-title"
+                  data-i18n="feature1Title"
+                >
+                  Read & Build
+                </h3>
+                <p class="ui-home-features-card-desc" data-i18n="feature1Desc">
+                  Read level-appropriate texts, tap words you don't know to see
+                  their meaning, and instantly add them as flashcards to your
+                  collection
+                </p>
+              </div>
+              <div class="ui-home-features-card">
+                <div
+                  class="ui-home-features-icon-box ui-home-features-icon-box-purple-indigo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"
+                    ></path>
+                    <path
+                      d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"
+                    ></path>
+                    <path
+                      d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"
+                    ></path>
+                  </svg>
+                </div>
+                <h3
+                  class="ui-home-features-card-title"
+                  data-i18n="feature2Title"
+                >
+                  Cards Review
+                </h3>
+                <p class="ui-home-features-card-desc" data-i18n="feature2Desc">
+                  Review your flashcards with spaced repetition — the smarter
+                  you practice, the fewer cards you'll need to see each day
+                </p>
+              </div>
+              <div class="ui-home-features-card">
+                <div
+                  class="ui-home-features-icon-box ui-home-features-icon-box-indigo-blue"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                  </svg>
+                </div>
+                <h3
+                  class="ui-home-features-card-title"
+                  data-i18n="feature3Title"
+                >
+                  AI Tutor
+                </h3>
+                <p class="ui-home-features-card-desc" data-i18n="feature3Desc">
+                  Chat with an AI tutor that knows your vocabulary, corrects
+                  your mistakes in context, and adapts to your current level
+                </p>
+              </div>
+              <div class="ui-home-features-card">
+                <div
+                  class="ui-home-features-icon-box ui-home-features-icon-box-blue-cyan"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"
+                    ></path>
+                    <path
+                      d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"
+                    ></path>
+                    <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path>
+                    <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path>
+                    <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path>
+                    <path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path>
+                    <path d="M19.938 10.5a4 4 0 0 1 .585.396"></path>
+                    <path d="M6 18a4 4 0 0 1-1.967-.516"></path>
+                    <path d="M19.967 17.484A4 4 0 0 1 18 18"></path>
+                  </svg>
+                </div>
+                <h3
+                  class="ui-home-features-card-title"
+                  data-i18n="feature4Title"
+                >
+                  Smart Collections
+                </h3>
+                <p class="ui-home-features-card-desc" data-i18n="feature4Desc">
+                  Organize your vocabulary with custom collections and groups
+                  for focused, efficient learning
+                </p>
+              </div>
+              <div class="ui-home-features-card">
+                <div
+                  class="ui-home-features-icon-box ui-home-features-icon-box-cyan-teal"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+                    ></path>
+                    <path d="M9 18h6"></path>
+                    <path d="M10 22h4"></path>
+                  </svg>
+                </div>
+                <h3
+                  class="ui-home-features-card-title"
+                  data-i18n="feature5Title"
+                >
+                  AI Assistance
+                </h3>
+                <p class="ui-home-features-card-desc" data-i18n="feature5Desc">
+                  Get instant hints, grammar explanations, and contextual help
+                  whenever you need it
+                </p>
+              </div>
+              <div class="ui-home-features-card">
+                <div
+                  class="ui-home-features-icon-box ui-home-features-icon-box-teal-green"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                    <polyline points="16 7 22 7 22 13"></polyline>
+                  </svg>
+                </div>
+                <h3
+                  class="ui-home-features-card-title"
+                  data-i18n="feature6Title"
+                >
+                  Progress Tracking
+                </h3>
+                <p class="ui-home-features-card-desc" data-i18n="feature6Desc">
+                  Visualize your learning journey with detailed stats on
+                  retention, streaks, and vocabulary growth over time
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ui-home-faq" id="faq">
+          <div class="ui-home-faq-container">
+            <div class="ui-home-faq-header">
+              <h2 class="ui-home-faq-title" data-i18n="faqTitle">
+                Frequently Asked Questions
+              </h2>
+              <p class="ui-home-faq-subtitle" data-i18n="faqSubtitle">
+                Everything you need to know about uLearn
+              </p>
+            </div>
+            <div class="ui-home-faq-accordion" x-data="{ active: null }">
+              <div
+                class="ui-home-faq-item"
+                :class="active === 1 ? 'is-open' : ''"
+              >
+                <button
+                  class="ui-home-faq-trigger"
+                  @click="active = active === 1 ? null : 1"
+                >
+                  <span data-i18n="faq1Q"
+                    >Which languages can I learn on uLearn?</span
+                  >
+                  <svg
+                    class="ui-home-faq-chevron"
+                    :class="active === 1 ? 'ui-home-faq-chevron-open' : ''"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+                <div class="ui-home-faq-content">
+                  <div class="ui-home-faq-content-inner">
+                    <p class="ui-home-faq-answer" data-i18n="faq1A">
+                      German and English are fully available today, with more
+                      languages on the way. Our content spans all CEFR levels
+                      from A1 (beginner) to C2 (mastery), so you can start
+                      wherever you are and grow from there.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ui-home-faq-item"
+                :class="active === 2 ? 'is-open' : ''"
+              >
+                <button
+                  class="ui-home-faq-trigger"
+                  @click="active = active === 2 ? null : 2"
+                >
+                  <span data-i18n="faq2Q"
+                    >Can I have voice conversations with the AI tutor?</span
+                  >
+                  <svg
+                    class="ui-home-faq-chevron"
+                    :class="active === 2 ? 'ui-home-faq-chevron-open' : ''"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+                <div class="ui-home-faq-content">
+                  <div class="ui-home-faq-content-inner">
+                    <p class="ui-home-faq-answer" data-i18n="faq2A">
+                      Yes. The AI tutor supports real voice conversations with
+                      full transcripts after each session. You can choose from
+                      pre-built scenarios — job interviews, travel situations,
+                      daily life — or describe any custom scenario and the AI
+                      will generate it on the spot.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ui-home-faq-item"
+                :class="active === 3 ? 'is-open' : ''"
+              >
+                <button
+                  class="ui-home-faq-trigger"
+                  @click="active = active === 3 ? null : 3"
+                >
+                  <span data-i18n="faq3Q"
+                    >How do flashcards work — do I have to create them
+                    myself?</span
+                  >
+                  <svg
+                    class="ui-home-faq-chevron"
+                    :class="active === 3 ? 'ui-home-faq-chevron-open' : ''"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+                <div class="ui-home-faq-content">
+                  <div class="ui-home-faq-content-inner">
+                    <p class="ui-home-faq-answer" data-i18n="faq3A">
+                      You can create cards manually or let AI do the heavy
+                      lifting. Just give a word or phrase and the AI generates
+                      the full card — definition, example sentences, and
+                      context. Cards are then reviewed using spaced repetition,
+                      so you see each one at the exact moment you're about to
+                      forget it.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ui-home-faq-item"
+                :class="active === 4 ? 'is-open' : ''"
+              >
+                <button
+                  class="ui-home-faq-trigger"
+                  @click="active = active === 4 ? null : 4"
+                >
+                  <span data-i18n="faq4Q">How does the "learn mode" work?</span>
+                  <svg
+                    class="ui-home-faq-chevron"
+                    :class="active === 4 ? 'ui-home-faq-chevron-open' : ''"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+                <div class="ui-home-faq-content">
+                  <div class="ui-home-faq-content-inner">
+                    <p class="ui-home-faq-answer" data-i18n="faq4A">
+                      The "learn mode" gives you level-appropriate texts
+                      organized by topic. Tap any word you don't recognize to
+                      instantly see its meaning, pronunciation, and examples —
+                      then add it to your flashcard collection with one tap. You
+                      can also generate a custom text on any topic using AI.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ui-home-faq-item"
+                :class="active === 5 ? 'is-open' : ''"
+              >
+                <button
+                  class="ui-home-faq-trigger"
+                  @click="active = active === 5 ? null : 5"
+                >
+                  <span data-i18n="faq5Q">Is there a free plan?</span>
+                  <svg
+                    class="ui-home-faq-chevron"
+                    :class="active === 5 ? 'ui-home-faq-chevron-open' : ''"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+                <div class="ui-home-faq-content">
+                  <div class="ui-home-faq-content-inner">
+                    <p class="ui-home-faq-answer" data-i18n="faq5A">
+                      Yes! Our free plan lets you explore all core features with
+                      generous monthly limits. Upgrade to Pro or Premium when
+                      you're ready for unlimited access to AI generation, word
+                      lookups, and chat messages.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ui-home-faq-item"
+                :class="active === 6 ? 'is-open' : ''"
+              >
+                <button
+                  class="ui-home-faq-trigger"
+                  @click="active = active === 6 ? null : 6"
+                >
+                  <span data-i18n="faq6Q">Is there a mobile app?</span>
+                  <svg
+                    class="ui-home-faq-chevron"
+                    :class="active === 6 ? 'ui-home-faq-chevron-open' : ''"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+                <div class="ui-home-faq-content">
+                  <div class="ui-home-faq-content-inner">
+                    <p class="ui-home-faq-answer" data-i18n="faq6A">
+                      uLearn is currently web-based and works great in any
+                      modern browser on desktop or mobile. A dedicated mobile
+                      app is on our roadmap — sign up to stay updated.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ui-home-faq-item"
+                :class="active === 7 ? 'is-open' : ''"
+              >
+                <button
+                  class="ui-home-faq-trigger"
+                  @click="active = active === 7 ? null : 7"
+                >
+                  <span data-i18n="faq7Q"
+                    >How is uLearn different from Duolingo or Anki?</span
+                  >
+                  <svg
+                    class="ui-home-faq-chevron"
+                    :class="active === 7 ? 'ui-home-faq-chevron-open' : ''"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+                <div class="ui-home-faq-content">
+                  <div class="ui-home-faq-content-inner">
+                    <p class="ui-home-faq-answer" data-i18n="faq7A">
+                      Duolingo gamifies bite-sized drills; Anki is a general
+                      flashcard engine. uLearn is built for serious learners who
+                      want everything in one place: spaced repetition that knows
+                      your vocabulary, real voice practice with an AI tutor, and
+                      level-appropriate reading — all tied together so each
+                      activity reinforces the others.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ui-home-faq-item ui-home-faq-item-last"
+                :class="active === 8 ? 'is-open' : ''"
+              >
+                <button
+                  class="ui-home-faq-trigger"
+                  @click="active = active === 8 ? null : 8"
+                >
+                  <span data-i18n="faq8Q"
+                    >Can I generate my own reading texts or conversation
+                    topics?</span
+                  >
+                  <svg
+                    class="ui-home-faq-chevron"
+                    :class="active === 8 ? 'ui-home-faq-chevron-open' : ''"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+                <div class="ui-home-faq-content">
+                  <div class="ui-home-faq-content-inner">
+                    <p class="ui-home-faq-answer" data-i18n="faq8A">
+                      Yes. In "learn mode" you can prompt the AI to generate a
+                      text on any topic at your current level. In the AI tutor,
+                      you can describe any scenario — a specific job, city, or
+                      situation — and it will create a tailored conversation for
+                      you.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="ui-home-footer">
+        <div class="ui-home-footer-container">
+          <div class="ui-home-footer-grid">
+            <div class="ui-home-footer-brand">
+              <div class="ui-home-footer-brand-row">
+                <span class="ui-home-footer-brand-name">uLearn</span>
+                <span class="ui-home-footer-brand-badge">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
+                    ></path>
+                    <path d="M5 3v4"></path>
+                    <path d="M19 17v4"></path>
+                    <path d="M3 5h4"></path>
+                    <path d="M17 19h4"></path>
+                  </svg>
+                  AI Powered
+                </span>
+              </div>
+              <p class="ui-home-footer-brand-desc" data-i18n="footerDesc">
+                Your intelligent companion for mastering any language. Learn at
+                your own pace with AI-powered flashcards and interactive
+                conversations.
+              </p>
+            </div>
+            <div class="ui-home-footer-col">
+              <h4
+                class="ui-home-footer-col-title"
+                data-i18n="footerProductTitle"
+              >
+                Product
+              </h4>
+              <ul class="ui-home-footer-links">
+                <li>
+                  <a
+                    href="#features"
+                    class="ui-home-footer-link"
+                    data-i18n="footerProductFeatures"
+                    >Features</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#pricing"
+                    class="ui-home-footer-link"
+                    data-i18n="footerProductPricing"
+                    >Pricing</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#faq"
+                    class="ui-home-footer-link"
+                    data-i18n="footerProductFaq"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="ui-home-footer-col">
+              <h4
+                class="ui-home-footer-col-title"
+                data-i18n="footerResourcesTitle"
+              >
+                Resources
+              </h4>
+              <ul class="ui-home-footer-links">
+                <li>
+                  <a
+                    href="/en/docs"
+                    class="ui-home-footer-link"
+                    data-i18n="footerDocs"
+                    >Documentation</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en/guide"
+                    class="ui-home-footer-link"
+                    data-i18n="footerGuide"
+                    >Learning Guide</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en/blog"
+                    class="ui-home-footer-link"
+                    data-i18n="footerBlog"
+                    >Blog</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en/support"
+                    class="ui-home-footer-link"
+                    data-i18n="footerSupport"
+                    >Support</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="ui-home-footer-bottom">
+            <p class="ui-home-footer-copy" data-i18n="footerCopy">
+              © 2025 uLearn. All rights reserved.
+            </p>
+            <div class="ui-home-footer-legal">
+              <a
+                href="/en/legal/privacy-policy"
+                class="ui-home-footer-legal-link"
+                data-i18n="footerPrivacy"
+                >Privacy Policy</a
+              >
+              <a
+                href="/en/legal/terms-of-service"
+                class="ui-home-footer-legal-link"
+                data-i18n="footerTerms"
+                >Terms of Service</a
+              >
+              <a
+                href="/en/home/contact"
+                class="ui-home-footer-legal-link"
+                data-i18n="footerContact"
+                >Contact</a
+              >
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
