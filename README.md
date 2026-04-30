@@ -36,6 +36,12 @@ Landing pages served while the web server is paused (or always, via direct nginx
 
 Styles and translations follow the same pattern: `assets/home.css`, `assets/home-i18n.js`, `assets/pricing.css`, `assets/pricing-i18n.js`. Supports `en`, `es`, `fr`, `it`.
 
+### `privacy.html`
+
+Privacy Policy page. Purely static content — no Alpine, no interactive components. Uses a minimal nav (logo + back-to-home link) matching the web app's legal layout.
+
+Styles live in `assets/privacy.css`, translations in `assets/privacy-i18n.js`. Supports `en`, `es`, `fr`, `it`.
+
 ## Commands
 
 | Command               | Description                                         |
@@ -52,7 +58,7 @@ make setup-i18n-dev
 make serve
 ```
 
-Then open e.g. `http://localhost:3001/es/downtime.html`, `http://localhost:3001/es/home.html`, or `http://localhost:3001/es/pricing.html` to test a specific language.
+Then open e.g. `http://localhost:3001/es/downtime.html`, `http://localhost:3001/es/home.html`, `http://localhost:3001/es/pricing.html`, or `http://localhost:3001/es/privacy.html` to test a specific language.
 
 ## Deployment
 
@@ -60,8 +66,8 @@ Configure your reverse proxy to serve the appropriate page for each error code a
 
 ```nginx
 # 502 Bad Gateway — served when the ECS task is down or redeploying.
-# Dispatches to home.html or pricing.html when the original request was for
-# those routes; falls back to downtime.html for everything else.
+# Dispatches to home.html, pricing.html, or privacy.html when the original
+# request was for those routes; falls back to downtime.html for everything else.
 # $request_uri preserves the original URI during the internal error redirect.
 error_page 502 @on_502;
 
@@ -73,6 +79,9 @@ location @on_502 {
     }
     if ($request_uri ~* "^(/[a-z]{2})?(/home)?/pricing$") {
         set $page pricing.html;
+    }
+    if ($request_uri ~* "^(/[a-z]{2})?/legal/privacy-policy$") {
+        set $page privacy.html;
     }
     try_files /$page;
 }

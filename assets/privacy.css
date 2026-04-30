@@ -1,0 +1,907 @@
+/* /css/layout.css */
+/* Reset y base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8fafc;
+  font-weight: 400;
+}
+
+html.dark body {
+  background-color: #111827;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5em;
+  color: #1a202c;
+}
+
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.75rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.25rem;
+}
+h5 {
+  font-size: 1.125rem;
+}
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-bottom: 1em;
+  color: #4a5568;
+}
+
+a {
+  color: #3182ce;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #2c5aa0;
+  text-decoration: underline;
+}
+
+/* Layout base */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header/Navigation */
+/* nav {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+} */
+
+.nav-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+/* Main content */
+main {
+  min-height: calc(100vh - 120px);
+  padding: 2rem 0;
+}
+
+/* Footer */
+/* footer { */
+/* background: #2d3748; */
+/* color: #a0aec0; */
+/* text-align: center; */
+/* padding: 1rem 0; */
+/* border-top: 1px solid #4a5568; */
+/* } */
+
+/* Utilities */
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-3 {
+  margin-top: 0.75rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mt-6 {
+  margin-top: 1.5rem;
+}
+.mt-8 {
+  margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  main {
+    padding: 1rem 0;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Smooth transitions */
+* {
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* ================================================================================================ */
+/* INACTIVE SUBSCRIPTION                                                                            */
+/* ================================================================================================ */
+
+/* It affects welcome.html, collections.html, navbar.html, sidebar.html and more components */
+
+body.inactive-sub > main {
+  margin-top: 115px;
+}
+
+body.inactive-sub > nav {
+  top: 2.5rem;
+}
+
+body.inactive-sub > aside {
+  top: 115px;
+  height: calc(100vh - 115px);
+}
+
+/* ================================================================================================ */
+/* TOAST SYSTEM                                                                                     */
+/* ================================================================================================ */
+
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 300px;
+  animation: toast-slide-in 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast-spinner {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  animation: toast-spin 1s linear infinite;
+}
+
+@keyframes toast-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.toast-info {
+  background: #3b82f6;
+}
+
+.toast-success {
+  background: #10b981;
+}
+
+.toast-warning {
+  background: #f59e0b;
+}
+
+.toast-error {
+  background: #ef4444;
+}
+
+.toast-loading {
+  background: #6366f1;
+}
+
+.toast-fade-out {
+  animation: toast-fade-out 0.3s ease-out forwards;
+}
+
+@keyframes toast-slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-fade-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Dark mode support */
+html.dark .toast-info {
+  background: #1e40af;
+}
+
+html.dark .toast-success {
+  background: #047857;
+}
+
+html.dark .toast-warning {
+  background: #d97706;
+}
+
+html.dark .toast-error {
+  background: #dc2626;
+}
+
+html.dark .toast-loading {
+  background: #4f46e5;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+/* /css/theme-toggle.css */
+/* ================================================================================================ */
+/* DEVELOPMENT ONLY STYLES - These styles should only be used in development mode                  */
+/* Remove or comment out these styles in production builds                                          */
+/* ================================================================================================ */
+
+.dev-theme-toggle {
+  position: fixed;
+  bottom: 80px;
+  right: 25px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dev-theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.dev-theme-toggle:active {
+  transform: scale(0.95);
+}
+
+html.dark .dev-theme-toggle {
+  background: #374151;
+  border-color: #4b5563;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .dev-theme-toggle:hover {
+  background: #4b5563;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ===========================
+   Privacy Page
+   =========================== */
+
+.privacy-page {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background: #f8fafc;
+}
+
+html.dark .privacy-page {
+  background: #0f172a;
+}
+
+/* ===========================
+   Background orbs
+   =========================== */
+
+.privacy-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.privacy-bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+}
+
+.privacy-bg-orb-blue {
+  top: -80px;
+  right: -80px;
+  width: 480px;
+  height: 480px;
+  background: rgba(59, 130, 246, 0.15);
+}
+
+html.dark .privacy-bg-orb-blue {
+  background: rgba(59, 130, 246, 0.07);
+}
+
+.privacy-bg-orb-purple {
+  bottom: 0;
+  left: -120px;
+  width: 560px;
+  height: 560px;
+  background: rgba(168, 85, 247, 0.12);
+}
+
+html.dark .privacy-bg-orb-purple {
+  background: rgba(168, 85, 247, 0.06);
+}
+
+/* ===========================
+   Nav
+   =========================== */
+
+.privacy-nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 24px 0 24px;
+}
+
+.privacy-nav-logo {
+  font-size: 1.375rem;
+  font-weight: 800;
+  background: linear-gradient(to right, #2563eb, #9333ea);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+
+.privacy-nav-logo:hover {
+  text-decoration: none;
+}
+
+.privacy-nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.privacy-nav-back:hover {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+html.dark .privacy-nav-back {
+  color: #94a3b8;
+}
+
+html.dark .privacy-nav-back:hover {
+  color: #60a5fa;
+}
+
+/* ===========================
+   Header
+   =========================== */
+
+.privacy-header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 56px 24px 48px 24px;
+}
+
+.privacy-header-content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.privacy-header-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+  margin-bottom: 16px;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+html.dark .privacy-header-badge {
+  background: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.privacy-header-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 10px 0;
+  line-height: 1.15;
+}
+
+html.dark .privacy-header-title {
+  color: #f1f5f9;
+}
+
+@media (max-width: 600px) {
+  .privacy-header-title {
+    font-size: 2rem;
+  }
+}
+
+.privacy-header-subtitle {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin: 0 0 18px 0;
+}
+
+.privacy-header-desc {
+  font-size: 1.0625rem;
+  color: #475569;
+  margin: 0;
+  line-height: 1.65;
+}
+
+html.dark .privacy-header-desc {
+  color: #94a3b8;
+}
+
+/* ===========================
+   Main content
+   =========================== */
+
+.privacy-content {
+  position: relative;
+  z-index: 10;
+  padding: 0 24px 80px 24px;
+}
+
+.privacy-container {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===========================
+   Sections
+   =========================== */
+
+.privacy-section {
+  display: flex;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 20px;
+  padding: 28px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 24px 0 rgba(15, 23, 42, 0.06);
+}
+
+html.dark .privacy-section {
+  background: rgba(30, 41, 59, 0.5);
+  border-color: rgba(51, 65, 85, 0.6);
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.2);
+}
+
+.privacy-section-highlight {
+  border-color: rgba(99, 102, 241, 0.25);
+  background: rgba(238, 242, 255, 0.7);
+}
+
+html.dark .privacy-section-highlight {
+  border-color: rgba(99, 102, 241, 0.3);
+  background: rgba(30, 27, 75, 0.35);
+}
+
+.privacy-section-last {
+  margin-bottom: 0;
+}
+
+@media (max-width: 560px) {
+  .privacy-section {
+    flex-direction: column;
+    gap: 14px;
+    padding: 22px 20px;
+  }
+}
+
+/* ===========================
+   Section icon
+   =========================== */
+
+.privacy-section-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin-top: 2px;
+}
+
+.privacy-section-icon-blue {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+}
+
+.privacy-section-icon-purple {
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+}
+
+.privacy-section-icon-indigo {
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+}
+
+/* ===========================
+   Section body
+   =========================== */
+
+.privacy-section-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.privacy-section-title {
+  font-size: 1.1875rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+html.dark .privacy-section-title {
+  color: #f1f5f9;
+}
+
+.privacy-section-text {
+  font-size: 0.9375rem;
+  color: #475569;
+  margin: 0 0 12px 0;
+  line-height: 1.7;
+}
+
+.privacy-section-text:last-child {
+  margin-bottom: 0;
+}
+
+html.dark .privacy-section-text {
+  color: #94a3b8;
+}
+
+/* ===========================
+   Callout box
+   =========================== */
+
+.privacy-callout {
+  background: rgba(99, 102, 241, 0.08);
+  border-left: 3px solid #6366f1;
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  font-size: 0.9375rem;
+  color: #3730a3;
+  margin-bottom: 14px;
+}
+
+html.dark .privacy-callout {
+  background: rgba(99, 102, 241, 0.12);
+  border-left-color: #818cf8;
+  color: #a5b4fc;
+}
+
+/* ===========================
+   List
+   =========================== */
+
+.privacy-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.privacy-list-item {
+  display: flex;
+  gap: 10px;
+  font-size: 0.9375rem;
+  color: #475569;
+  line-height: 1.65;
+}
+
+html.dark .privacy-list-item {
+  color: #94a3b8;
+}
+
+.privacy-list-dot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  margin-top: 9px;
+}
+
+.privacy-list-label {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+html.dark .privacy-list-label {
+  color: #e2e8f0;
+}
+
+/* ===========================
+   Table
+   =========================== */
+
+.privacy-table {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  margin-bottom: 14px;
+}
+
+html.dark .privacy-table {
+  border-color: rgba(51, 65, 85, 0.6);
+}
+
+.privacy-table-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 12px;
+  padding: 11px 16px;
+  font-size: 0.9rem;
+  color: #475569;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+.privacy-table-row:last-child {
+  border-bottom: none;
+}
+
+html.dark .privacy-table-row {
+  color: #94a3b8;
+  border-bottom-color: rgba(51, 65, 85, 0.5);
+}
+
+.privacy-table-header {
+  background: rgba(241, 245, 249, 0.8);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+}
+
+html.dark .privacy-table-header {
+  background: rgba(15, 23, 42, 0.5);
+  color: #64748b;
+}
+
+.privacy-table-service {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+html.dark .privacy-table-service {
+  color: #e2e8f0;
+}
+
+@media (max-width: 480px) {
+  .privacy-table-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .privacy-table-header span:last-child {
+    display: none;
+  }
+}
+
+/* ===========================
+   Contact box
+   =========================== */
+
+.privacy-contact-box {
+  display: inline-block;
+  background: rgba(241, 245, 249, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 0.9375rem;
+  color: #1e293b;
+  line-height: 1.8;
+}
+
+html.dark .privacy-contact-box {
+  background: rgba(15, 23, 42, 0.5);
+  border-color: rgba(51, 65, 85, 0.6);
+  color: #e2e8f0;
+}
+
+.privacy-contact-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.privacy-contact-link:hover {
+  text-decoration: underline;
+}
+
+html.dark .privacy-contact-link {
+  color: #60a5fa;
+}
+
+/* ===========================
+   Footer
+   =========================== */
+
+.privacy-footer {
+  position: relative;
+  z-index: 10;
+  border-top: 1px solid rgba(226, 232, 240, 0.6);
+  padding: 24px;
+}
+
+html.dark .privacy-footer {
+  border-top-color: rgba(51, 65, 85, 0.5);
+}
+
+.privacy-footer-content {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.privacy-footer-brand {
+  font-size: 1rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #2563eb, #9333ea);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.privacy-footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.privacy-footer-link {
+  font-size: 0.875rem;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.privacy-footer-link:hover {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+html.dark .privacy-footer-link {
+  color: #64748b;
+}
+
+html.dark .privacy-footer-link:hover {
+  color: #60a5fa;
+}
