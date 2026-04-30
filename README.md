@@ -101,7 +101,7 @@ location @on_502 {
     if ($request_uri ~* "^(/[a-z]{2})?/home/contact$") {
         set $page html/contact.html;
     }
-    try_files /$page;
+    try_files /$page =502;
 }
 
 # 503 Service Unavailable — served during planned maintenance (flag file toggle).
