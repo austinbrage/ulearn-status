@@ -1,12 +1,12 @@
 # ulearn-status
 
-Static error pages served by the reverse proxy when the uLearn app is unreachable.
+Static pages served by the reverse proxy when the uLearn app is unreachable or intentionally offline.
 
 ## Pages
 
-### `502.html`
+### `downtime.html`
 
-Shown when the upstream app server returns a 502 (Bad Gateway) — typically during a deploy or a brief outage. The page is intentionally neutral: it doesn't alarm users or make promises about timing, just lets them know something routine is happening and gives them a refresh button.
+Shown when the upstream app server is temporarily unavailable — typically during a deploy or a brief outage. The page is intentionally neutral: it doesn't alarm users or make promises about timing, just lets them know something routine is happening and gives them a refresh button.
 
 Content:
 
@@ -15,9 +15,9 @@ Content:
 - **While you wait** card — reassures users their data is safe and no action is needed
 - **Footer** — Refresh Page button, email and Twitter support links
 
-Styles live in `assets/502.css`, translations in `assets/502-i18n.js`. Light/dark mode is handled via `html.dark` (set from `localStorage` with `prefers-color-scheme` as fallback). Supports `en`, `es`, `fr`, `it`.
+Styles live in `assets/downtime.css`, translations in `assets/downtime-i18n.js`. Light/dark mode is handled via `html.dark` (set from `localStorage` with `prefers-color-scheme` as fallback). Supports `en`, `es`, `fr`, `it`.
 
-### `503.html`
+### `maintenance.html`
 
 Shown during scheduled maintenance — when the app is intentionally taken offline. Mirrors the maintenance page from the web server.
 
@@ -28,7 +28,13 @@ Content:
 - **What we're working on** card — lists improvements being made
 - **Footer** — Refresh Page button, Return to Home (links to `/:lang/home`), email and Twitter support links
 
-Styles live in `assets/503.css`, translations in `assets/503-i18n.js`. Same light/dark and i18n behaviour as `502.html`. Supports `en`, `es`, `fr`, `it`.
+Styles live in `assets/maintenance.css`, translations in `assets/maintenance-i18n.js`. Same light/dark and i18n behaviour as `downtime.html`. Supports `en`, `es`, `fr`, `it`.
+
+### `home.html` / `pricing.html`
+
+Landing pages served while the web server is paused. Populated by the export script in the `web` repo — these files are empty placeholders until that script runs.
+
+Styles and translations follow the same pattern: `assets/home.css`, `assets/home-i18n.js`, `assets/pricing.css`, `assets/pricing-i18n.js`.
 
 ## Commands
 
@@ -46,21 +52,21 @@ make setup-i18n-dev
 make serve
 ```
 
-Then open e.g. `http://localhost:3001/es/502.html` or `http://localhost:3001/es/503.html` to test a specific language.
+Then open e.g. `http://localhost:3001/es/downtime.html` or `http://localhost:3001/es/maintenance.html` to test a specific language.
 
 ## Deployment
 
-Configure your reverse proxy to serve the pages for the appropriate error codes. Example for nginx:
+Configure your reverse proxy to serve the appropriate page for each error code and route. Example for nginx:
 
 ```nginx
-error_page 502 /502.html;
-location = /502.html {
+error_page 502 /downtime.html;
+location = /downtime.html {
     root /path/to/ulearn-services/status;
     internal;
 }
 
-error_page 503 /503.html;
-location = /503.html {
+error_page 503 /maintenance.html;
+location = /maintenance.html {
     root /path/to/ulearn-services/status;
     internal;
 }
