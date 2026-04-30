@@ -15,7 +15,7 @@ Content:
 - **While you wait** card — reassures users their data is safe and no action is needed
 - **Footer** — Refresh Page button, email and Twitter support links
 
-Styles live in `assets/downtime.css`, translations in `assets/downtime-i18n.js`. Light/dark mode is handled via `html.dark` (set from `localStorage` with `prefers-color-scheme` as fallback). Supports `en`, `es`, `fr`, `it`.
+Styles live in `assets/css/downtime.css`, translations in `assets/js/downtime-i18n.js`. Light/dark mode is handled via `html.dark` (set from `localStorage` with `prefers-color-scheme` as fallback). Supports `en`, `es`, `fr`, `it`.
 
 ### `maintenance.html`
 
@@ -28,31 +28,31 @@ Content:
 - **What we're working on** card — lists improvements being made
 - **Footer** — Refresh Page button, Return to Home (links to `/:lang/home`), email and Twitter support links
 
-Styles live in `assets/maintenance.css`, translations in `assets/maintenance-i18n.js`. Same light/dark and i18n behaviour as `downtime.html`. Supports `en`, `es`, `fr`, `it`.
+Styles live in `assets/css/maintenance.css`, translations in `assets/js/maintenance-i18n.js`. Same light/dark and i18n behaviour as `downtime.html`. Supports `en`, `es`, `fr`, `it`.
 
 ### `home.html` / `pricing.html`
 
 Landing pages served while the web server is paused (or always, via direct nginx routes). Fully self-contained: no auth states, no API calls, all CTAs link to `/user/signup` or `/user/signin`.
 
-Styles and translations follow the same pattern: `assets/home.css`, `assets/home-i18n.js`, `assets/pricing.css`, `assets/pricing-i18n.js`. Supports `en`, `es`, `fr`, `it`.
+Styles and translations follow the same pattern: `assets/css/home.css`, `assets/js/home-i18n.js`, `assets/css/pricing.css`, `assets/js/pricing-i18n.js`. Supports `en`, `es`, `fr`, `it`.
 
 ### `privacy.html`
 
 Privacy Policy page. Purely static content — no Alpine, no interactive components. Uses a minimal nav (logo + back-to-home link) matching the web app's legal layout.
 
-Styles live in `assets/privacy.css`, translations in `assets/privacy-i18n.js`. Supports `en`, `es`, `fr`, `it`.
+Styles live in `assets/css/privacy.css`, translations in `assets/js/privacy-i18n.js`. Supports `en`, `es`, `fr`, `it`.
 
 ### `terms.html`
 
 Terms of Service page. Same structure as the privacy page — purely static, minimal nav. Section 4 includes an inline link to the pricing page.
 
-Styles live in `assets/terms.css`, translations in `assets/terms-i18n.js`. Supports `en`, `es`, `fr`, `it`.
+Styles live in `assets/css/terms.css`, translations in `assets/js/terms-i18n.js`. Supports `en`, `es`, `fr`, `it`.
 
 ### `contact.html`
 
 Contact page. Purely static — two cards (email and Twitter/X) with links, minimal nav matching the legal layout.
 
-Styles live in `assets/contact.css`, translations in `assets/contact-i18n.js`. Supports `en`, `es`, `fr`, `it`.
+Styles live in `assets/css/contact.css`, translations in `assets/js/contact-i18n.js`. Supports `en`, `es`, `fr`, `it`.
 
 ## Commands
 
