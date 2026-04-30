@@ -32,9 +32,9 @@ Styles live in `assets/maintenance.css`, translations in `assets/maintenance-i18
 
 ### `home.html` / `pricing.html`
 
-Landing pages served while the web server is paused. Populated by the export script in the `web` repo — these files are empty placeholders until that script runs.
+Landing pages served while the web server is paused (or always, via direct nginx routes). Fully self-contained: no auth states, no API calls, all CTAs link to `/user/signup` or `/user/signin`.
 
-Styles and translations follow the same pattern: `assets/home.css`, `assets/home-i18n.js`, `assets/pricing.css`, `assets/pricing-i18n.js`.
+Styles and translations follow the same pattern: `assets/home.css`, `assets/home-i18n.js`, `assets/pricing.css`, `assets/pricing-i18n.js`. Supports `en`, `es`, `fr`, `it`.
 
 ## Commands
 
@@ -52,26 +52,40 @@ make setup-i18n-dev
 make serve
 ```
 
-Then open e.g. `http://localhost:3001/es/downtime.html` or `http://localhost:3001/es/maintenance.html` to test a specific language.
+Then open e.g. `http://localhost:3001/es/downtime.html`, `http://localhost:3001/es/home.html`, or `http://localhost:3001/es/pricing.html` to test a specific language.
 
 ## Deployment
 
-Configure your reverse proxy to serve the appropriate page for each error code and route. Example for nginx:
+Configure your reverse proxy to serve the appropriate page for each error code and route. The nginx snippet below goes inside the `server {}` block, alongside your existing `location /` proxy block.
 
 ```nginx
-error_page 502 /downtime.html;
-location = /downtime.html {
-    root /path/to/ulearn-services/status;
-    internal;
+# 502 Bad Gateway — served when the ECS task is down or redeploying.
+# Dispatches to home.html or pricing.html when the original request was for
+# those routes; falls back to downtime.html for everything else.
+# $request_uri preserves the original URI during the internal error redirect.
+error_page 502 @on_502;
+
+location @on_502 {
+    root /var/www/ulearn-status;
+    set $page downtime.html;
+    if ($request_uri ~* "^(/[a-z]{2})?/home$") {
+        set $page home.html;
+    }
+    if ($request_uri ~* "^(/[a-z]{2})?(/home)?/pricing$") {
+        set $page pricing.html;
+    }
+    try_files /$page;
 }
 
+# 503 Service Unavailable — served during planned maintenance (flag file toggle).
 error_page 503 /maintenance.html;
 location = /maintenance.html {
-    root /path/to/ulearn-services/status;
+    root /var/www/ulearn-status;
     internal;
 }
 
+# Static assets shared by all status and landing pages.
 location /assets/ {
-    root /path/to/ulearn-services/status;
+    root /var/www/ulearn-status;
 }
 ```
