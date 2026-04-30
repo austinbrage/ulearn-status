@@ -12,22 +12,18 @@ serve: ## Serve static pages locally on port 3001
 	@echo "Serving at http://localhost:3001 — open downtime.html or maintenance.html"
 	@python3 -m http.server 3001
 
-setup-i18n-dev: ## Create lang subdirs with symlinks for i18n testing (e.g. /es/downtime.html, /es/maintenance.html)
+setup-i18n-dev: ## Create lang subdirs with symlinks for i18n testing (e.g. /es/downtime.html)
 	@for lang in $(LANGS); do \
 		mkdir -p $$lang; \
-		ln -sf ../downtime.html $$lang/downtime.html; \
-		ln -sf ../maintenance.html $$lang/maintenance.html; \
-		ln -sf ../home.html $$lang/home.html; \
-		ln -sf ../pricing.html $$lang/pricing.html; \
-		ln -sf ../privacy.html $$lang/privacy.html; \
-		ln -sf ../terms.html $$lang/terms.html; \
-		ln -sf ../contact.html $$lang/contact.html; \
-		echo "  $$lang/downtime.html -> ../downtime.html"; \
-		echo "  $$lang/maintenance.html -> ../maintenance.html"; \
-		echo "  $$lang/home.html -> ../home.html"; \
-		echo "  $$lang/pricing.html -> ../pricing.html"; \
+		ln -sf ../html/downtime.html $$lang/downtime.html; \
+		ln -sf ../html/maintenance.html $$lang/maintenance.html; \
+		ln -sf ../html/home.html $$lang/home.html; \
+		ln -sf ../html/pricing.html $$lang/pricing.html; \
+		ln -sf ../html/privacy.html $$lang/privacy.html; \
+		ln -sf ../html/terms.html $$lang/terms.html; \
+		ln -sf ../html/contact.html $$lang/contact.html; \
 	done
-	@echo "Ready. Run 'make serve' then open e.g. http://localhost:3001/es/downtime.html or http://localhost:3001/es/maintenance.html"
+	@echo "Ready. Run 'make serve' then open e.g. http://localhost:3001/es/downtime.html"
 
 clean-i18n-dev: ## Remove lang subdirs created by setup-i18n-dev
 	@for lang in $(LANGS); do \

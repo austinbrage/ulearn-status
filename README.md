@@ -85,28 +85,28 @@ error_page 502 @on_502;
 
 location @on_502 {
     root /var/www/ulearn-status;
-    set $page downtime.html;
+    set $page html/downtime.html;
     if ($request_uri ~* "^(/[a-z]{2})?/home$") {
-        set $page home.html;
+        set $page html/home.html;
     }
     if ($request_uri ~* "^(/[a-z]{2})?(/home)?/pricing$") {
-        set $page pricing.html;
+        set $page html/pricing.html;
     }
     if ($request_uri ~* "^(/[a-z]{2})?/legal/privacy-policy$") {
-        set $page privacy.html;
+        set $page html/privacy.html;
     }
     if ($request_uri ~* "^(/[a-z]{2})?/legal/terms-of-service$") {
-        set $page terms.html;
+        set $page html/terms.html;
     }
     if ($request_uri ~* "^(/[a-z]{2})?/home/contact$") {
-        set $page contact.html;
+        set $page html/contact.html;
     }
     try_files /$page;
 }
 
 # 503 Service Unavailable — served during planned maintenance (flag file toggle).
-error_page 503 /maintenance.html;
-location = /maintenance.html {
+error_page 503 /html/maintenance.html;
+location = /html/maintenance.html {
     root /var/www/ulearn-status;
     internal;
 }
