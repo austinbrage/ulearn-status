@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="pageTitle">Contact — uLearn</title>
+    <meta
+      name="description"
+      data-i18n="pageDescription"
+      content="Get in touch with the uLearn team."
+    />
+    <link rel="stylesheet" href="/assets/contact.css" />
+    <script>
+      (function () {
+        var stored = localStorage.getItem("theme");
+        if (
+          stored === "dark" ||
+          (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+    <script defer src="/assets/contact-i18n.js"></script>
+  </head>
+  <body>
+    <div class="contact-page">
+      <!-- Background orbs -->
+      <div class="contact-bg">
+        <div class="contact-bg-orb contact-bg-orb-blue"></div>
+        <div class="contact-bg-orb contact-bg-orb-purple"></div>
+      </div>
+
+      <!-- Top nav -->
+      <nav class="contact-nav">
+        <a href="/en/home" data-lang-href="home" class="contact-nav-logo"
+          >uLearn</a
+        >
+        <a href="/en/home" data-lang-href="home" class="contact-nav-back">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M19 12H5"></path>
+            <path d="m12 19-7-7 7-7"></path>
+          </svg>
+          <span data-i18n="navBack">Back to home</span>
+        </a>
+      </nav>
+
+      <!-- Header -->
+      <header class="contact-header">
+        <div class="contact-header-content">
+          <div class="contact-header-badge" data-i18n="badge">Contact</div>
+          <h1 class="contact-header-title" data-i18n="title">Get in touch</h1>
+          <p class="contact-header-desc" data-i18n="desc">
+            Have a question, found a bug, or just want to say hi? I'd love to
+            hear from you.
+          </p>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="contact-content">
+        <div class="contact-container">
+          <!-- Email card -->
+          <div class="contact-card">
+            <div class="contact-card-icon contact-card-icon-blue">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+            </div>
+            <div class="contact-card-body">
+              <h2 class="contact-card-title" data-i18n="emailTitle">Email</h2>
+              <p class="contact-card-desc" data-i18n="emailDesc">
+                The best way to reach us. We usually reply within 1–2 business
+                days.
+              </p>
+              <a
+                href="mailto:support@ultimatelearning.app"
+                class="contact-card-btn contact-card-btn-primary"
+              >
+                support@ultimatelearning.app
+              </a>
+            </div>
+          </div>
+
+          <!-- Twitter card -->
+          <div class="contact-card">
+            <div class="contact-card-icon contact-card-icon-purple">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                ></path>
+              </svg>
+            </div>
+            <div class="contact-card-body">
+              <h2 class="contact-card-title" data-i18n="twitterTitle">
+                X (Twitter)
+              </h2>
+              <p class="contact-card-desc" data-i18n="twitterDesc">
+                Follow for updates, announcements, and the occasional language
+                learning tip.
+              </p>
+              <a
+                href="https://twitter.com/uLearnOfficial"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-card-btn contact-card-btn-outline"
+              >
+                @uLearnOfficial
+              </a>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="contact-footer">
+        <div class="contact-footer-content">
+          <span class="contact-footer-brand">uLearn</span>
+          <div class="contact-footer-links">
+            <a
+              href="/en/legal/privacy-policy"
+              data-lang-href="legal/privacy-policy"
+              class="contact-footer-link"
+              data-i18n="footerPrivacy"
+              >Privacy Policy</a
+            >
+            <a
+              href="/en/legal/terms-of-service"
+              data-lang-href="legal/terms-of-service"
+              class="contact-footer-link"
+              data-i18n="footerTerms"
+              >Terms of Service</a
+            >
+            <a
+              href="/en/home"
+              data-lang-href="home"
+              class="contact-footer-link"
+              data-i18n="footerHome"
+              >Home</a
+            >
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

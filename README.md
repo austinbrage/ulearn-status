@@ -48,6 +48,12 @@ Terms of Service page. Same structure as the privacy page — purely static, min
 
 Styles live in `assets/terms.css`, translations in `assets/terms-i18n.js`. Supports `en`, `es`, `fr`, `it`.
 
+### `contact.html`
+
+Contact page. Purely static — two cards (email and Twitter/X) with links, minimal nav matching the legal layout.
+
+Styles live in `assets/contact.css`, translations in `assets/contact-i18n.js`. Supports `en`, `es`, `fr`, `it`.
+
 ## Commands
 
 | Command               | Description                                         |
@@ -64,7 +70,7 @@ make setup-i18n-dev
 make serve
 ```
 
-Then open e.g. `http://localhost:3001/es/downtime.html`, `http://localhost:3001/es/home.html`, `http://localhost:3001/es/pricing.html`, `http://localhost:3001/es/privacy.html`, or `http://localhost:3001/es/terms.html` to test a specific language.
+Then open e.g. `http://localhost:3001/es/downtime.html`, `http://localhost:3001/es/home.html`, `http://localhost:3001/es/pricing.html`, `http://localhost:3001/es/privacy.html`, `http://localhost:3001/es/terms.html`, or `http://localhost:3001/es/contact.html` to test a specific language.
 
 ## Deployment
 
@@ -91,6 +97,9 @@ location @on_502 {
     }
     if ($request_uri ~* "^(/[a-z]{2})?/legal/terms-of-service$") {
         set $page terms.html;
+    }
+    if ($request_uri ~* "^(/[a-z]{2})?/home/contact$") {
+        set $page contact.html;
     }
     try_files /$page;
 }
