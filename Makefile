@@ -20,6 +20,7 @@ setup-i18n-dev: ## Create lang subdirs with symlinks for i18n testing (e.g. /es/
 		ln -sf ../home.html $$lang/home.html; \
 		ln -sf ../pricing.html $$lang/pricing.html; \
 		ln -sf ../privacy.html $$lang/privacy.html; \
+		ln -sf ../terms.html $$lang/terms.html; \
 		echo "  $$lang/downtime.html -> ../downtime.html"; \
 		echo "  $$lang/maintenance.html -> ../maintenance.html"; \
 		echo "  $$lang/home.html -> ../home.html"; \

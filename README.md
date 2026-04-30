@@ -42,6 +42,12 @@ Privacy Policy page. Purely static content — no Alpine, no interactive compone
 
 Styles live in `assets/privacy.css`, translations in `assets/privacy-i18n.js`. Supports `en`, `es`, `fr`, `it`.
 
+### `terms.html`
+
+Terms of Service page. Same structure as the privacy page — purely static, minimal nav. Section 4 includes an inline link to the pricing page.
+
+Styles live in `assets/terms.css`, translations in `assets/terms-i18n.js`. Supports `en`, `es`, `fr`, `it`.
+
 ## Commands
 
 | Command               | Description                                         |
@@ -58,7 +64,7 @@ make setup-i18n-dev
 make serve
 ```
 
-Then open e.g. `http://localhost:3001/es/downtime.html`, `http://localhost:3001/es/home.html`, `http://localhost:3001/es/pricing.html`, or `http://localhost:3001/es/privacy.html` to test a specific language.
+Then open e.g. `http://localhost:3001/es/downtime.html`, `http://localhost:3001/es/home.html`, `http://localhost:3001/es/pricing.html`, `http://localhost:3001/es/privacy.html`, or `http://localhost:3001/es/terms.html` to test a specific language.
 
 ## Deployment
 
@@ -66,8 +72,8 @@ Configure your reverse proxy to serve the appropriate page for each error code a
 
 ```nginx
 # 502 Bad Gateway — served when the ECS task is down or redeploying.
-# Dispatches to home.html, pricing.html, or privacy.html when the original
-# request was for those routes; falls back to downtime.html for everything else.
+# Dispatches to home.html, pricing.html, privacy.html, or terms.html when the
+# original request was for those routes; falls back to downtime.html for everything else.
 # $request_uri preserves the original URI during the internal error redirect.
 error_page 502 @on_502;
 
@@ -82,6 +88,9 @@ location @on_502 {
     }
     if ($request_uri ~* "^(/[a-z]{2})?/legal/privacy-policy$") {
         set $page privacy.html;
+    }
+    if ($request_uri ~* "^(/[a-z]{2})?/legal/terms-of-service$") {
+        set $page terms.html;
     }
     try_files /$page;
 }
