@@ -102,9 +102,12 @@ const translations = {
     else el.textContent = t[key];
   });
 
-  // Home button — link to /:lang/home
-  var homeBtn = document.getElementById("maintenance-home-btn");
-  if (homeBtn) homeBtn.href = "/" + lang + "/home";
+  // Rewrite lang-aware hrefs
+  if (lang !== "en") {
+    document.querySelectorAll("[data-lang-href]").forEach((el) => {
+      el.href = "/" + lang + "/" + el.dataset.langHref;
+    });
+  }
 
   // Lang dropdown
   const btn = document.getElementById("maintenance-lang-btn");

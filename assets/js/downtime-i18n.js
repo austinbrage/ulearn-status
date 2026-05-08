@@ -102,6 +102,13 @@ const translations = {
     else el.textContent = t[key];
   });
 
+  // Rewrite lang-aware hrefs
+  if (lang !== "en") {
+    document.querySelectorAll("[data-lang-href]").forEach((el) => {
+      el.href = "/" + lang + "/" + el.dataset.langHref;
+    });
+  }
+
   // Lang dropdown
   const btn = document.getElementById("downtime-lang-btn");
   const dropdown = document.getElementById("downtime-lang-dropdown");
