@@ -1,6 +1,6 @@
 const translations = {
   en: {
-    pageTitle: "uLearn - Scheduled Maintenance",
+    pageTitle: "Scheduled Maintenance — uLearn",
     pageDescription:
       "We're performing scheduled maintenance to improve your experience.",
     title: "We're Under Maintenance",
@@ -22,7 +22,7 @@ const translations = {
     twitterLabel: "Twitter",
   },
   es: {
-    pageTitle: "uLearn - Mantenimiento programado",
+    pageTitle: "Mantenimiento programado — uLearn",
     pageDescription:
       "Estamos realizando mantenimiento programado para mejorar tu experiencia.",
     title: "En mantenimiento",
@@ -43,7 +43,7 @@ const translations = {
     twitterLabel: "Twitter",
   },
   fr: {
-    pageTitle: "uLearn - Maintenance programmée",
+    pageTitle: "Maintenance programmée — uLearn",
     pageDescription:
       "Nous effectuons une maintenance programmée pour améliorer votre expérience.",
     title: "En maintenance",
@@ -65,7 +65,7 @@ const translations = {
     twitterLabel: "Twitter",
   },
   it: {
-    pageTitle: "uLearn - Manutenzione programmata",
+    pageTitle: "Manutenzione programmata — uLearn",
     pageDescription:
       "Stiamo eseguendo una manutenzione programmata per migliorare la tua esperienza.",
     title: "In manutenzione",

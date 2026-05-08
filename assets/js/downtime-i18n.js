@@ -1,6 +1,6 @@
 const translations = {
   en: {
-    pageTitle: "uLearn - We'll be right back",
+    pageTitle: "We'll be right back — uLearn",
     pageDescription: "A quick update or fix is in progress. Back in a moment.",
     title: "We'll be right back",
     subtitle: "Hang tight \u2014 this won't take long",
@@ -21,7 +21,7 @@ const translations = {
     contactTwitter: "@uLearnOfficial",
   },
   es: {
-    pageTitle: "uLearn - Volvemos enseguida",
+    pageTitle: "Volvemos enseguida — uLearn",
     pageDescription:
       "Estamos publicando una actualización o resolviendo algo pequeño. Volvemos en un momento.",
     title: "Volvemos enseguida",
@@ -43,7 +43,7 @@ const translations = {
     contactTwitter: "@uLearnOfficial",
   },
   fr: {
-    pageTitle: "uLearn - On revient tout de suite",
+    pageTitle: "On revient tout de suite — uLearn",
     pageDescription:
       "Nous déployons une mise à jour ou réglons quelque chose de mineur. De retour dans un instant.",
     title: "On revient tout de suite",
@@ -65,7 +65,7 @@ const translations = {
     contactTwitter: "@uLearnOfficial",
   },
   it: {
-    pageTitle: "uLearn - Torniamo subito",
+    pageTitle: "Torniamo subito — uLearn",
     pageDescription:
       "Stiamo rilasciando un aggiornamento o sistemando qualcosa di piccolo. Torniamo tra un momento.",
     title: "Torniamo subito",
